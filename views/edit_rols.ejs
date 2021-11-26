@@ -1,0 +1,1974 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
+
+<script>
+    var id;
+    function edits(){
+        var gps ,role,main_desh,vehicle,report,user,update,fuelCard,action,rol_name;
+    var url = window.location.pathname;
+    id = url.substring(url.lastIndexOf('/') + 1);
+    $.get('/edit___roles?id='+id, function (recordset) {
+        rol_name = recordset["recordsets"][0][0]["r_name"];
+        document.getElementById("role_name").value=rol_name;
+        main_desh = recordset["recordsets"][0][0]["r_main_dash"];
+        var r_main_desh = JSON.parse(main_desh);
+        var desh = r_main_desh.dashboard;
+        console.log("main_desh  =>"+desh);
+        if(desh==='1'){
+            document.getElementById("main_dash").checked = true;
+        }
+
+        action = recordset["recordsets"][0][0]["r_action"];
+        var actionS = JSON.parse(action);
+        var create = actionS.create;
+        var update = actionS.update;
+        var delete1 = actionS.delete1;
+        var view = actionS.view;
+
+        if(create=='1'){
+            document.getElementById("create").checked = true;
+
+        }
+        
+        if(update=='1'){
+            document.getElementById("update").checked = true;
+
+        }
+        if(delete1=='1'){
+            document.getElementById("delete").checked = true;
+
+        }
+        if(view=='1'){
+            document.getElementById("view").checked = true;
+
+        }
+
+
+
+        fuelCard = recordset["recordsets"][0][0]["r_fuel_card"];
+        var all_card_desh = JSON.parse(fuelCard);
+        var all_cardS = all_card_desh.all_card;
+        var not_allocS = all_card_desh.not_alloc;
+        var excel_impS = all_card_desh.excel_imp;
+        var upload_veslocity = all_card_desh.upload_veslocity;
+
+        if(all_cardS==='1' || not_allocS==='1' || excel_impS==='1'|| upload_veslocity==='1'){
+            document.getElementById("fuel_card").checked = true;
+            $(".box2").toggle();
+        }
+
+        if(all_cardS=='1'){
+            document.getElementById("all_card").checked = true;
+
+        }
+        
+        if(not_allocS=='1'){
+            document.getElementById("not_alloc").checked = true;
+
+        }
+        if(excel_impS=='1'){
+            document.getElementById("excel_imp").checked = true;
+
+        }
+        if(upload_veslocity=='1'){
+            document.getElementById("upload_veslocity").checked = true;
+
+        }
+        console.log("main_desh_card  =>"+all_cardS);
+
+        vehicle= recordset["recordsets"][0][0]["r_vehicle"];
+        var r_vehicle = JSON.parse(vehicle);
+        var all_vehicleS = r_vehicle.all_vehicle;
+        
+
+        if(all_vehicleS==='1' ){
+            document.getElementById("vehi").checked = true;
+            $(".box1").toggle();
+            document.getElementById("all_vehicle").checked = true;
+
+            // document.getElementsByClassName("box1").style.display="block";
+        }
+        
+        console.log("vehicle ==> "+all_vehicleS) ;
+
+        gps= recordset["recordsets"][0][0]["r_gps"];
+        var r_gps = JSON.parse(gps);
+        var map = r_gps.map;
+        var geofence = r_gps.geofence;
+        var hd_report = r_gps.hd_report;
+        var dd_report = r_gps.dd_report;
+        console.log("map ==> "+map + " " + geofence + " " + hd_report + " " + dd_report);
+        
+        if(map==='1' || geofence==='1' || hd_report==='1' || dd_report==='1'){
+            document.getElementById("gps").checked = true;
+            $(".box3").toggle();
+        }
+
+        if(map=='1'){
+            document.getElementById("map").checked = true;
+
+        }
+        
+        if(geofence=='1'){
+            document.getElementById("geofence").checked = true;
+
+        }
+        if(hd_report=='1'){
+            document.getElementById("hd_report").checked = true;
+
+        }
+        if(dd_report=='1'){
+            document.getElementById("dd_report").checked = true;
+
+        }
+
+        report= recordset["recordsets"][0][0]["r_report"];
+        var r_report = JSON.parse(report);
+        var fuel_report = r_report.fuel_report;
+        var et_vehicle = r_report.et_vehicle;
+        var emp_vehicle = r_report.emp_vehicle;
+        var ent_report = r_report.ent_report;
+        var cardss__history = r_report.cards___history;
+        var dpts_reports = r_report.dpt_report;
+
+        
+
+        if(fuel_report==='1' || et_vehicle==='1' || emp_vehicle==='1' || ent_report==='1' || cards___history ==='1'|| cards___history ==='1'|| dpt_report ==='1'){
+            document.getElementById("report").checked = true;
+            $(".box4").toggle();
+            
+
+        }
+        
+        if(fuel_report=='1'){
+            document.getElementById("fuel_report").checked = true;
+        }
+        
+        if(et_vehicle=='1'){
+            document.getElementById("et_vehicle").checked = true;
+        }
+        if(emp_vehicle=='1'){
+            document.getElementById("emp_vehicle").checked = true;
+        }
+        if(ent_report=='1'){
+            document.getElementById("ent_report").checked = true;
+           
+        }
+        if(cardss__history=='1'){
+            document.getElementById("cards___history").checked = true;
+           
+        }
+        if(dpts_reports=='1'){
+            document.getElementById("dpt_report").checked = true;
+           
+        }
+
+        console.log("report ==>  " + et_vehicle + " " + emp_vehicle + " " + ent_report+ " " +fuel_report+ " " +card_history);
+
+        user= recordset["recordsets"][0][0]["r_users"];
+        var r_user = JSON.parse(user);
+        var user_list = r_user.user_list;
+        var roles = r_user.roles;
+        
+        if(user_list==='1' || roles==='1'){
+            document.getElementById("users").checked = true;
+            $(".box5").toggle();
+            
+
+        }
+        if(user_list==='1'){
+            document.getElementById("user_list").checked = true;
+        }
+        if(roles==='1'){
+            document.getElementById("roles").checked = true;
+        }
+        
+        console.log("user ==>  " + user_list + " " + roles );
+
+        update= recordset["recordsets"][0][0]["r_update_vehi"];
+        var r_update = JSON.parse(update);
+        var update_desh = r_update.dashboard;
+        var allocation = r_update.allocation;
+        var basi_info = r_update.basi_info;
+        var fueling = r_update.fueling;
+        var feculty = r_update.feculty;
+        var stole = r_update.stole;
+        var veh_driver = r_update.veh_driver;
+        var create_vehicles = r_update.create_vehicles;
+        var res_person = r_update.res_person;
+        var tab_fleets_cards = r_update.tab_fleets_cards;
+        var average = r_update.average;
+
+        if(update_desh==='1' || allocation==='1' || basi_info==='1' || fueling==='1' || feculty==='1' || stole==='1' || veh_driver==='1'|| create_vehicles==='1'|| res_person==='1'|| tab_fleets_cards==='1'|| average==='1'){
+            document.getElementById("updateVehicle").checked = true;
+            $(".box6").toggle();
+            
+
+        }
+
+        if(update_desh==='1'){
+            document.getElementById("dashboard").checked = true;
+        }
+        
+        if(allocation=='1'){
+            document.getElementById("allocation").checked = true;
+        }
+        if(basi_info=='1'){
+            document.getElementById("basi_info").checked = true;
+        }
+        if(fueling=='1'){
+            document.getElementById("fueling").checked = true;
+        }
+        if(feculty=='1'){
+            document.getElementById("feculty").checked = true;
+        }
+        if(stole=='1'){
+            document.getElementById("stole_").checked = true;
+        }
+        if(veh_driver=='1'){
+            document.getElementById("veh_driver").checked = true;
+        }
+        if(create_vehicles=='1'){
+            document.getElementById("addd_vehicle").checked = true;
+        }
+        if(res_person=='1'){
+            document.getElementById("res_person").checked = true;
+        }
+        if(tab_fleets_cards=='1'){
+            document.getElementById("fleets_cards").checked = true;
+        }
+        if(average=='1'){
+            document.getElementById("average_").checked = true;
+        }
+
+        console.log("check  " + update_desh + " "+ allocation);
+
+        // ------------------------------------------------
+
+        setup= recordset["recordsets"][0][0]["r_setups"];
+        var r_setup = JSON.parse(setup);
+        var fuel__rate_profile = r_setup.fuel__rate_profile;
+        var vehicle__make = r_setup.vehicle__make;
+        var fleet__card = r_setup.fleet__card;
+        
+        if(fuel__rate_profile==='1' || vehicle__make==='1' || fleet__card==='1'){
+            document.getElementById("setup").checked = true;
+            $(".box7").toggle();
+            
+
+        }
+
+        if(fuel__rate_profile=='1'){
+            document.getElementById("fuel__rate_profile").checked = true;
+        }
+        if(vehicle__make=='1'){
+            document.getElementById("vehicle__make").checked = true;
+        }
+        if(fleet__card=='1'){
+            document.getElementById("fleet__card").checked = true;
+        }
+        
+        console.log("hum "+desh);
+        
+        // // ------------------------------------------------------------    
+
+        // if(map=='1'){
+        //     var x = document.getElementById("mapS");
+        //     x.style.display = "block";
+        // }
+        
+        // if(geofence=='1'){
+        //     var x = document.getElementById("geofenceS");
+        //     x.style.display = "block";
+        // }
+        // if(hd_report=='1'){
+        //     var x = document.getElementById("hd_reportS");
+        //     x.style.display = "block";
+        // }
+        // if(dd_report=='1'){
+        //     var x = document.getElementById("dd_reportS");
+        //     x.style.display = "block";
+        // }
+
+        // // -----------------------------------------------------------------------
+
+        // if(fuel_report=='1'){
+        //     var x = document.getElementById("fuel_reportS");
+        //     x.style.display = "block";
+        // }
+        
+        // if(et_vehicle=='1'){
+        //     var x = document.getElementById("et_vehicleS");
+        //     x.style.display = "block";
+        // }
+        // if(emp_vehicle=='1'){
+        //     var x = document.getElementById("emp_vehicleS");
+        //     x.style.display = "block";
+        // }
+        // if(ent_report=='1'){
+        //     var x = document.getElementById("ent_reportS");
+        //     x.style.display = "block";
+        // }
+        // if(maintainace=='1'){
+        //     var x = document.getElementById("maintainaceS");
+        //     x.style.display = "block";
+        // }
+
+        // if(user_list=='1'){
+        //     var x = document.getElementById("user_listS");
+        //     x.style.display = "block";
+        // }
+        // if(roles=='1'){
+        //     var x = document.getElementById("manage_role");
+        //     x.style.display = "block";
+        // }
+        // if(dept_user=='1'){
+        //     var x = document.getElementById("dept_user");
+        //     x.style.display = "block";
+        // }
+        // // ---------------------------------------------------------------------
+        // if(all_cardS=='1'){
+        //     var x = document.getElementById("all_cardS");
+        //     x.style.display = "block";
+        // }
+        // if(not_allocS=='1'){
+        //     var x = document.getElementById("not_allocS");
+        //     x.style.display = "block";
+        // }
+        // if(excel_impS=='1'){
+        //     var x = document.getElementById("excel_impS");
+        //     x.style.display = "block";
+        // }
+        // ---------------------------------------------------------------------
+        // if(update_desh=='1'){
+        //     var x = document.getElementById('v-line-pills-Dashboard-tab');
+        //     x.style.display = "block";
+        // }
+
+        // if(allocation=='1'){
+        //     var x = document.getElementById("v-line-pills-Allocation-tab");
+        //     x.style.display = "block";
+        // }
+
+        // if(basi_info=='1'){
+        //     var x = document.getElementById("v-line-pills-Info-tab");
+        //     x.style.display = "block";
+        // }
+
+        // if(odometer=='1'){
+        //     var x = document.getElementById("v-line-pills-odo-tab");
+        //     x.style.display = "block";
+        // }
+        // if(fueling=='1'){
+        //     var x = document.getElementById("v-line-pills-Fuel-tab");
+        //     x.style.display = "block";
+        // }
+        // if(Maintainace=='1'){
+        //     var x = document.getElementById("v-line-pills-Maintenance-tab");
+        //     x.style.display = "block";
+        // }
+        // if(feculty=='1'){
+        //     var x = document.getElementById("v-line-pills-Faculty-tab");
+        //     x.style.display = "block";
+        // }
+        
+        
+        // console.log("update Vehicle ==>  " + update_desh + " " + allocation );
+    });
+    }
+    
+
+    
+   
+   
+</script>
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from designreset.com/cork/ltr/demo12/starter_kit_alt_menu.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 May 2021 05:27:13 GMT -->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>Edit User Roles | TCF </title>
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico" />
+    <link href="/assets/css/loader.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/js/loader.js"></script>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&amp;display=swap" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/structure.css" rel="stylesheet" type="text/css" class="structure" />
+
+
+    <link rel="stylesheet" type="text/css" href="/plugins/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="/plugins/bootstrap-select/bootstrap-select.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/plugins/table/datatable/datatables.css">
+    <link rel="stylesheet" type="text/css" href="/plugins/table/datatable/custom_dt_html5.css">
+    <link rel="stylesheet" type="text/css" href="/plugins/table/datatable/dt-global_style.css">
+
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link href="/assets/css/components/custom-modal.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/animate/animate.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/forms/theme-checkbox-radio.css">
+    <link href="/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/animate/animate.css" rel="stylesheet" type="text/css" />
+    <script src="/plugins/sweetalerts/promise-polyfill.js"></script>
+    <link href="/plugins/sweetalerts/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/sweetalerts/sweetalert.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/components/custom-sweetalert.css" rel="stylesheet" type="text/css" />
+
+
+
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+
+
+
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+
+</head>
+<style>
+    .my-custom-scrollbar {
+        position: relative;
+        /* width: 800px; */
+        height: 80vh;
+        overflow: auto;
+    }
+
+    .box1 {
+        color: black;
+        display: none;
+        margin-top: 20px;
+        margin-bottom: 20px;
+
+    }
+
+    .box2 {
+        color: black;
+        display: none;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .box3 {
+        color: black;
+        display: none;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .box4 {
+        color: black;
+        display: none;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .box5 {
+        color: black;
+        display: none;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .box6 {
+        color: black;
+        display: none;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+    .box7 {
+        color: black;
+        display: none;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    .check {
+        background: #ffffff;
+    }
+</style>
+
+<body class="sidebar-noneoverflow starterkit admin-header alt-menu" onload="edits()">
+
+    <!-- BEGIN LOADER -->
+    <div id="load_screen">
+        <div class="loader">
+            <div class="loader-content">
+                <div class="spinner-grow align-self-center"></div>
+            </div>
+        </div>
+    </div>
+    <!--  END LOADER -->
+
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
+
+        <!--  BEGIN SIDEBAR  -->
+        <%- include("sidebar") %>
+            <!--  END SIDEBAR  -->
+
+            <!--  BEGIN CONTENT AREA  -->
+            <div id="content" class="main-content">
+                <div class="layout-px-spacing">
+
+                    <div class="content-container">
+
+                        <div class="col-md-12 layout-top-spacing">
+                            <div class="col-left-content">
+
+                                <div class="header-container">
+                                    <header class="header navbar navbar-expand-sm">
+                                        <div class="d-flex">
+                                            <a href="javascript:void(0);" class="sidebarCollapse"
+                                                data-placement="bottom">
+                                                <div class="bt-menu-trigger">
+                                                    <span></span>
+                                                </div>
+                                            </a>
+                                            <div class="page-header">
+                                                <div class="page-title">
+                                                    <h3>Edit Role</h3>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="header-actions">
+                                            <div class="nav-item dropdown language-dropdown more-dropdown">
+                                                <div class="dropdown custom-dropdown-icon">
+                                                    <div class="nav-item dropdown language-dropdown more-dropdown">
+                                                        <%- include("logout") %>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="toggle-notification-bar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="feather feather-bell">
+                                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </header>
+                                </div>
+
+                                <div class="row mt-4">
+
+                                    <div id="tabsVerticalWithIcon" class="col-lg-12 col-12 layout-spacing">
+                                        <div class="statbox widget box box-shadow">
+
+                                           
+
+
+                                                <blockquote class="blockquote mb-4">
+                                                    
+                                                    <!-- <h4 class="mb-4">Roles</h4> -->
+                                                    <div class="container-fluid mt-5">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                
+                                                                <div class="row">
+                                                                    <div class="col-md-12">
+                                                                        <div class="row mb-4">
+                                                                            <div class="col-md-12">
+                                                                                <div class="form-group row  mb-4">
+                                                                                    <label for="colFormLabelSm"
+                                                                                        class="col-sm-2 col-form-label col-form-label-sm text-center">Role Name
+                                                                                        : </label>
+                                                                                    <div class="col-sm-10">
+                                                                                        <input id="role_name" name="role_name" type="text" name="txt"
+                                                                                            placeholder="Enter Role" class="form-control" required>
+                                                                                    </div>
+                                        
+                                                                                </div>
+                                                                                <div class="form-group row  mb-4">
+                                        
+                                                                                    <div class="col-md-12">
+                                                                                        <div class="row">
+                                                                                            <div class="col-md-3 d-none">
+                                                                                                <div class="n-chk">
+                                                                                                    <label class="new-control new-checkbox checkbox-primary">
+                                                                                                      <input type="checkbox" class="new-control-input" value="1" id="create" name="create" checked>
+                                                                                                      <span class="new-control-indicator"></span>Create
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-md-3">
+                                                                                                <div class="n-chk">
+                                                                                                    <label class="new-control new-checkbox checkbox-primary">
+                                                                                                      <input type="checkbox" class="new-control-input" value="1" id="update" name="update">
+                                                                                                      <span class="new-control-indicator"></span>Update
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-md-3">
+                                                                                                <div class="n-chk">
+                                                                                                    <label class="new-control new-checkbox checkbox-primary">
+                                                                                                      <input type="checkbox" class="new-control-input" value="1" id="delete" name="delete">
+                                                                                                      <span class="new-control-indicator"></span>Delete
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="col-md-3">
+                                                                                                <div class="n-chk">
+                                                                                                    <label class="new-control new-checkbox checkbox-primary">
+                                                                                                      <input type="checkbox" class="new-control-input" value="1" id="view" name="view">
+                                                                                                      <span class="new-control-indicator"></span>View
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                        
+                                                                                        </div>
+                                                                                        <div class="row mt-3">
+                                        
+                                                                                            <div class="col-md-3">
+                                                                                                <div class="n-chk">
+                                                                                                    <label class="new-control new-checkbox checkbox-primary">
+                                                                                                        <input type="checkbox" class="new-control-input"
+                                                                                                            value="1" id="main_dash" name="main_dash">
+                                                                                                        <span class="new-control-indicator"></span>Dashboard
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                        
+                                                                                        </div>
+                                                                                        <div class="row">
+                                        
+                                                                                            <div class="col-md-3">
+                                                                                                <div class="n-chk">
+                                                                                                    <label class="new-control new-checkbox checkbox-primary">
+                                                                                                        <input type="checkbox" name="vehi" value="1" id="vehi"
+                                                                                                            class="new-control-input">
+                                                                                                        <span class="new-control-indicator"></span>Vehicles
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                        
+                                                                                        </div>
+                                                                                        <div class="row box1" style="margin-left: 50px;">
+                                                                                            <div class="check">
+                                        
+                                                                                                <div class="col-md-12">
+                                                                                                    <div class="row">
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="all_vehicle"
+                                                                                                                    name="all_vehicle">
+                                                                                                                <span class="new-control-indicator"></span>All
+                                                                                                                Vehicles
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                        <!-- <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="manage_faculty"
+                                                                                                                    name="manage_faculty">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Manage
+                                                                                                                Faculty
+                                                                                                            </label>
+                                                                                                        </div> -->
+                                                                                                        <!-- <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="vehicle_assign"
+                                                                                                                    name="vehicle_assign">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Vehicle
+                                                                                                                Assign
+                                                                                                            </label>
+                                                                                                        </div> -->
+                                        
+                                        
+                                                                                                    </div>
+                                        
+                                                                                                </div>
+                                        
+                                                                                            </div>
+                                                                                        </div>
+                                        
+                                                                                        <div class="row">
+                                        
+                                                                                            <div class="col-md-3">
+                                                                                                <div class="n-chk">
+                                                                                                    <label class="new-control new-checkbox checkbox-primary">
+                                                                                                        <input type="checkbox" name="fuel_card" value="1"
+                                                                                                            id="fuel_card" class="new-control-input">
+                                                                                                        <span class="new-control-indicator"></span>Fuel Cards
+                                                                                                    </label>
+                                                                                                </div>
+                                        
+                                                                                            </div>
+                                        
+                                                                                        </div>
+                                                                                        <div class="row" style="margin-left: 50px;">
+                                                                                            <div class="check box2">
+                                        
+                                                                                                <div class="col-md-12">
+                                                                                                    <div class="row">
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="all_card" name="all_card">
+                                                                                                                <span class="new-control-indicator"></span>All
+                                                                                                                Cards
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="not_alloc" name="not_alloc">
+                                                                                                                <span class="new-control-indicator"></span>Not
+                                                                                                                allocated
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="excel_imp" name="excel_imp">
+                                                                                                                <span class="new-control-indicator"></span>Excel
+                                                                                                                Importer
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="upload_veslocity" name="upload_veslocity">
+                                                                                                                <span class="new-control-indicator"></span>Upload 
+                                                                                                                Velocity
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                        
+                                        
+                                        
+                                                                                                    </div>
+                                        
+                                                                                                </div>
+                                        
+                                                                                            </div>
+                                                                                        </div>
+                                        
+                                        
+                                                                                        <div class="row">
+                                        
+                                                                                            <div class="col-md-3">
+                                                                                                <div class="n-chk">
+                                                                                                    <label class="new-control new-checkbox checkbox-primary">
+                                                                                                        <input type="checkbox" name="gps" value="1" id="gps"
+                                                                                                            class="new-control-input">
+                                                                                                        <span class="new-control-indicator"></span>GPS
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                        
+                                                                                        </div>
+                                                                                        <div class="row" style="margin-left: 50px;">
+                                                                                            <div class="check box3">
+                                        
+                                                                                                <div class="col-md-12">
+                                                                                                    <div class="row">
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="map" name="map">
+                                                                                                                <span class="new-control-indicator"></span>Maps
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="geofence" name="geofence">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Geofence
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="hd_report" name="hd_report">
+                                                                                                                <span class="new-control-indicator"></span>HD
+                                                                                                                Report
+                                                                                                            </label>
+                                                                                                        </div>
+                                        
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="dd_report" name="dd_report">
+                                                                                                                <span class="new-control-indicator"></span>DD
+                                                                                                                Report
+                                                                                                            </label>
+                                                                                                        </div>
+                                        
+                                        
+                                                                                                    </div>
+                                        
+                                                                                                </div>
+                                        
+                                                                                            </div>
+                                                                                        </div>
+                                        
+                                                                                        <div class="row">
+                                        
+                                                                                            <div class="col-md-3">
+                                                                                                <div class="n-chk">
+                                                                                                    <label class="new-control new-checkbox checkbox-primary">
+                                                                                                        <input type="checkbox" name="report" value="1"
+                                                                                                            id="report" class="new-control-input">
+                                                                                                        <span class="new-control-indicator"></span>Reports
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                        
+                                                                                        </div>
+                                                                                        <div class="row" style="margin-left: 50px;">
+                                                                                            <div class="check box4">
+                                        
+                                                                                                <div class="col-md-12">
+                                                                                                    <div class="row">
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="fuel_report"
+                                                                                                                    name="fuel_report">
+                                                                                                                <span class="new-control-indicator"></span>Fuel
+                                                                                                                Report
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="et_vehicle" name="et_vehicle">
+                                                                                                                <span class="new-control-indicator"></span>ET
+                                                                                                                Vehicle
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="emp_vehicle"
+                                                                                                                    name="emp_vehicle">
+                                                                                                                <span class="new-control-indicator"></span>Emp
+                                                                                                                WO Vehicle
+                                                                                                            </label>
+                                                                                                        </div>
+                                        
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="ent_report" name="ent_report">
+                                                                                                                <span class="new-control-indicator"></span>M Ent
+                                                                                                                Report
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="cards___history" name="cards___history">
+                                                                                                                <span class="new-control-indicator"></span>Card History
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="dpt_report" name="dpt_report">
+                                                                                                                <span class="new-control-indicator"></span>Departmental Report
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                        <!-- <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="maintainace"
+                                                                                                                    name="maintainace">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Maintainace
+                                                                                                            </label>
+                                                                                                        </div> -->
+                                        
+                                        
+                                                                                                    </div>
+                                        
+                                                                                                </div>
+                                        
+                                                                                            </div>
+                                                                                        </div>
+                                        
+                                                                                        <div class="row">
+                                        
+                                                                                            <div class="col-md-3">
+                                                                                                <div class="n-chk">
+                                                                                                    <label class="new-control new-checkbox checkbox-primary">
+                                                                                                        <input type="checkbox" name="users" value="1" id="users"
+                                                                                                            class="new-control-input">
+                                                                                                        <span class="new-control-indicator"></span>Users
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                        
+                                                                                        </div>
+                                                                                        <div class="row" style="margin-left: 50px;">
+                                                                                            <div class="check box5">
+                                        
+                                                                                                <div class="col-md-12">
+                                                                                                    <div class="row">
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="user_list" name="user_list">
+                                                                                                                <span class="new-control-indicator"></span>User
+                                                                                                                list
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="roles" name="roles">
+                                                                                                                <span class="new-control-indicator"></span>Roles
+                                                                                                            </label>
+                                                                                                        </div>
+                                        
+                                                                                                        <!-- <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="dept_user" name="dept_user">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Assign
+                                                                                                                Department to User
+                                                                                                            </label>
+                                                                                                        </div> -->
+                                        
+                                        
+                                        
+                                                                                                    </div>
+                                        
+                                                                                                </div>
+                                        
+                                                                                            </div>
+                                                                                        </div>
+                                        
+                                                                                        <div class="row">
+                                        
+                                                                                            <div class="col-md-6">
+                                                                                                <div class="n-chk">
+                                                                                                    <label class="new-control new-checkbox checkbox-primary">
+                                                                                                        <input type="checkbox" name="colorCheckbox" value="1"
+                                                                                                            id="updateVehicle" name="updateVehicle"
+                                                                                                            class="new-control-input">
+                                                                                                        <span class="new-control-indicator"></span>Update
+                                                                                                        Vehicles
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                        
+                                                                                        </div>
+                                                                                        <div class="row" style="margin-left: 50px;">
+                                                                                            <div class="check box6">
+                                        
+                                                                                                <div class="col-md-12">
+                                                                                                    <div class="row">
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="dashboard" name="dashboard">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Dashboard Tab
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="allocation" name="allocation">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Allocation Tab
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="basi_info" name="basi_info">
+                                                                                                                <span class="new-control-indicator"></span>Basic 
+                                                                                                                Info Tab
+                                                                                                            </label>
+                                                                                                        </div>
+                                        
+                                                                                                        <!-- <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="odometer" name="odometer">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Odometer Tab
+                                                                                                            </label>
+                                                                                                        </div> -->
+                                        
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="fueling" name="fueling">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Fueling Tab
+                                                                                                            </label>
+                                                                                                        </div>
+                                        
+                                                                                                        <!-- <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="Maintainace"
+                                                                                                                    name="Maintainace">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Maintainace Tab
+                                                                                                            </label>
+                                                                                                        </div> -->
+                                        
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="feculty" name="feculty">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Faculty Tab
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="veh_driver" name="veh_driver">
+                                                                                                                <span class="new-control-indicator"></span>Driver
+                                                                                                        </div>
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="stole_" name="stole_">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Stolen/Incident Tab
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="addd_vehicle" name="addd_vehicle">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Create Vehicle
+                                                                                                            </label>
+                                                                                                        </div>
+                                        
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="res_person" name="res_person">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Responsible Person
+                                                                                                            </label>
+                                                                                                        </div>
+                                        
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="fleets_cards" name="fleets_cards">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Fleet Card
+                                                                                                            </label>
+                                                                                                        </div>
+                                        
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="average_" name="average_">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Average
+                                                                                                            </label>
+                                                                                                        </div>
+                                        
+                                                                                                        <!-- <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="update__allocation" name="update__allocation">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Update Allocation
+                                                                                                            </label>
+                                                                                                        </div> -->
+                                        
+                                                                                                        <!-- <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="update__basic_info" name="update__basic_info">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Update Basic Information
+                                                                                                            </label>
+                                                                                                        </div> -->
+                                                                                                        <!-- <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="update__faculty" name="update__faculty">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Update Faculty
+                                                                                                            </label>
+                                                                                                        </div> -->
+                                        
+                                                                                                        <!-- <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="assign__driver" name="assign__driver">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Assign Driver
+                                                                                                            </label>
+                                                                                                        </div> -->
+                                        
+                                                                                                        <!-- <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="add__incident" name="add__incident">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Add Incident
+                                                                                                            </label>
+                                                                                                        </div> -->
+                                                                                                        <!-- <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="add__incident" name="add__incident">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Add Fueling 
+                                                                                                            </label>
+                                                                                                        </div> -->
+                                        
+                                        
+                                                                                                    </div>
+                                        
+                                                                                                </div>
+                                        
+                                                                                            </div>
+                                                                                        </div>
+                                        
+                                                                                        <div class="row">
+                                        
+                                                                                            <div class="col-md-3">
+                                                                                                <div class="n-chk">
+                                                                                                    <label class="new-control new-checkbox checkbox-primary">
+                                                                                                        <input type="checkbox" name="setup" value="1" id="setup"
+                                                                                                            class="new-control-input">
+                                                                                                        <span class="new-control-indicator"></span>Setups
+                                                                                                    </label>
+                                                                                                </div>
+                                                                                            </div>
+                                        
+                                                                                        </div>
+                                                                                        <div class="row" style="margin-left: 50px;">
+                                                                                            <div class="check box7">
+                                        
+                                                                                                <div class="col-md-12">
+                                                                                                    <div class="row">
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="fuel__rate_profile" name="fuel__rate_profile">
+                                                                                                                <span class="new-control-indicator"></span>Fuel Rate Profile
+                                                                                                            </label>
+                                                                                                        </div>
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="vehicle__make" name="vehicle__make">
+                                                                                                                <span class="new-control-indicator"></span>Vehicle Make
+                                                                                                            </label>
+                                                                                                        </div>
+                                        
+                                                                                                        <div class="n-chk">
+                                                                                                            <label
+                                                                                                                class="new-control new-checkbox checkbox-primary">
+                                                                                                                <input type="checkbox" class="new-control-input"
+                                                                                                                    value="1" id="fleet__card" name="fleet__card">
+                                                                                                                <span
+                                                                                                                    class="new-control-indicator"></span>Fleet Card
+                                                                                                            </label>
+                                                                                                        </div>
+                                        
+                                        
+                                        
+                                                                                                    </div>
+                                        
+                                                                                                </div>
+                                        
+                                                                                            </div>
+                                                                                        </div>
+                                        
+                                        
+                                                                                    </div>
+                                                                                </div>
+                                        
+                                                                            </div>
+                                        
+                                                                        </div>
+                                            
+                                                                            <div class="container-fluid">
+                                                                                <div class="row">
+                                                                                    <div class="col-md-12">
+                                                                                        <button type="button" class="btn btn-primary" onclick="getData()" style="float: right;">Save</button>
+                                                                                        <a class="btn" href="/manage_roles"  style="float: right;"> Cancel</a>
+                                                                            
+                                                                            
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                            
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    
+                                                </blockquote>
+
+                                           
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <!--  END CONTENT AREA  -->
+    </div>
+    <!-- END MAIN CONTAINER -->
+
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="/assets/js/libs/jquery-3.1.1.min.js"></script>
+    <script src="/bootstrap/js/popper.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script>
+        $(document).ready(function () {
+            App.init();
+        });
+    </script>
+
+
+
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <script src="/assets/js/custom.js"></script>
+    <script src="/assets/js/scrollspyNav.js"></script>
+
+    <script src="/plugins/highlight/highlight.pack.js"></script>
+    <script src="/plugins/select2/select2.min.js"></script>
+    <script src="/plugins/select2/custom-select2.js"></script>
+    <script src="/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+
+    <script src="/plugins/table/datatable/datatables.js"></script>
+    <!-- NOTE TO Use Copy CSV Excel PDF Print Options You Must Include These Files  -->
+    <script src="/plugins/table/datatable/button-ext/dataTables.buttons.min.js"></script>
+    <script src="/plugins/table/datatable/button-ext/jszip.min.js"></script>
+    <script src="/plugins/table/datatable/button-ext/buttons.html5.min.js"></script>
+    <script src="/plugins/table/datatable/button-ext/buttons.print.min.js"></script>
+
+    <script src="/plugins/sweetalerts/sweetalert2.min.js"></script>
+    <script src="/plugins/sweetalerts/custom-sweetalert.js"></script>
+    <script>
+         $(document).ready(function () {
+            // $('#vehi').click(function() {
+            //     var inputValue = $(this).attr("value");
+            //     console.log("han "+inputValue);
+            //     $("." + inputValue).toggle();
+            // });
+            $("#vehi").click(function () {
+                $(".box1").toggle();
+            });
+
+            $("#fuel_card").click(function () {
+                $(".box2").toggle();
+            });
+
+            $("#gps").click(function () {
+                $(".box3").toggle();
+            });
+
+            $("#report").click(function () {
+                $(".box4").toggle();
+            });
+
+            $("#users").click(function () {
+                $(".box5").toggle();
+            });
+
+            $("#updateVehicle").click(function () {
+                $(".box6").toggle();
+            });
+            $("#setup").click(function () {
+                $(".box7").toggle();
+            });
+
+        });
+    </script>
+
+    <!-- <script src="assets/js/scrollspyNav.js"></script> -->
+    <script>
+       
+        var myCustomScrollbar = document.querySelector('.my-custom-scrollbar');
+        var ps = new PerfectScrollbar(myCustomScrollbar);
+
+        var scrollbarY = myCustomScrollbar.querySelector('.ps__rail-y');
+
+        myCustomScrollbar.onscroll = function () {
+            scrollbarY.style.cssText = `top: ${this.scrollTop}px!important; height: 400px; right: ${-this.scrollLeft}px`;
+        }
+
+
+       
+    </script>
+
+    <script>
+        function getData() {
+            var rolName = document.getElementById("role_name").value;
+            console.log("Role Name " + rolName);
+            var action = {};
+            var create= document.getElementById("create")
+            if(create.checked){
+                create=create.value;
+
+             }
+            else{
+                create=0
+            }
+
+
+            var update= document.getElementById("update")
+            if(update.checked){
+                update=update.value;
+
+             }
+            else{
+                update=0
+            }
+
+            var delete1= document.getElementById("delete")
+            if(delete1.checked){
+                delete1=delete1.value;
+
+             }
+            else{
+                delete1=0
+            }
+
+            var view= document.getElementById("view")
+            if(view.checked){
+                view=view.value;
+
+             }
+            else{
+                view=0
+            }
+
+
+
+            action = {
+                create : create,
+                update : update,
+                delete1 : delete1,
+                view : view
+
+            };
+            var actionS = JSON.stringify(action)
+            console.log("action S  " + actionS);
+
+
+            var mainDash = {};
+            var dashboard = document.getElementById("main_dash")
+            if (dashboard.checked) {
+                dashboard = dashboard.value;
+                console.log(dashboard);
+            }
+            else {
+                dashboard = 0
+            }
+            mainDash = {
+                dashboard: dashboard,
+
+
+            };
+            var mainDashboard = JSON.stringify(mainDash);
+            console.log("bsdk " + mainDashboard);
+
+
+
+            var vehicle = {};
+            var all_vehicle = document.getElementById("all_vehicle")
+            if (all_vehicle.checked) {
+                all_vehicle = all_vehicle.value;
+
+            }
+            else {
+                all_vehicle = 0
+            }
+
+            // var vehicle_assign = document.getElementById("vehicle_assign")
+            // if (vehicle_assign.checked) {
+            //     vehicle_assign = vehicle_assign.value;
+
+            // }
+            // else {
+            //     vehicle_assign = 0
+            // }
+
+            // var manage_faculty = document.getElementById("manage_faculty")
+            // if (manage_faculty.checked) {
+            //     manage_faculty = manage_faculty.value;
+
+            // }
+            // else {
+            //     manage_faculty = 0
+            // }
+
+
+            vehicle = {
+                all_vehicle: all_vehicle
+                
+
+            };
+            var vehicleS = JSON.stringify(vehicle);
+            console.log(vehicleS);
+
+            var fuel_cards = {};
+            var all_card = document.getElementById("all_card")
+            if (all_card.checked) {
+                all_card = all_card.value;
+
+            }
+            else {
+                all_card = 0
+            }
+
+
+            var not_alloc = document.getElementById("not_alloc")
+            if (not_alloc.checked) {
+                not_alloc = not_alloc.value;
+
+            }
+            else {
+                not_alloc = 0
+            }
+
+            var excel_imp = document.getElementById("excel_imp")
+            if (excel_imp.checked) {
+                excel_imp = excel_imp.value;
+
+            }
+            else {
+                excel_imp = 0
+            }
+            var upload_veslocity = document.getElementById("upload_veslocity")
+            if (upload_veslocity.checked) {
+                upload_veslocity = upload_veslocity.value;
+
+            }
+            else {
+                upload_veslocity = 0
+            }
+
+
+
+            fuel_cards = {
+                all_card: all_card,
+                not_alloc: not_alloc,
+                excel_imp: excel_imp,
+                upload_veslocity: upload_veslocity
+
+            };
+            var cardS = JSON.stringify(fuel_cards);
+            console.log(cardS);
+
+            var gps = {};
+            var map = document.getElementById("map")
+            if (map.checked) {
+                map = map.value;
+
+            }
+            else {
+                map = 0
+            }
+
+
+            var geofence = document.getElementById("geofence")
+            if (geofence.checked) {
+                geofence = geofence.value;
+
+            }
+            else {
+                geofence = 0
+            }
+
+            var hd_report = document.getElementById("hd_report")
+            if (hd_report.checked) {
+                hd_report = hd_report.value;
+
+            }
+            else {
+                hd_report = 0
+            }
+
+            var geofence = document.getElementById("geofence")
+            if (geofence.checked) {
+                geofence = geofence.value;
+
+            }
+            else {
+                geofence = 0
+            }
+
+            var dd_report = document.getElementById("dd_report")
+            if (dd_report.checked) {
+                dd_report = dd_report.value;
+
+            }
+            else {
+                dd_report = 0
+            }
+
+
+
+            gps = {
+                map: map,
+                geofence: geofence,
+                hd_report: hd_report,
+                dd_report: dd_report
+
+            };
+
+            var gpsS = JSON.stringify(gps);
+            console.log(gpsS);
+
+            var reports = {};
+            var fuel_report = document.getElementById("fuel_report")
+            if (fuel_report.checked) {
+                fuel_report = fuel_report.value;
+
+            }
+            else {
+                fuel_report = 0
+            }
+
+
+            var et_vehicle = document.getElementById("et_vehicle")
+            if (et_vehicle.checked) {
+                et_vehicle = et_vehicle.value;
+
+            }
+            else {
+                et_vehicle = 0
+            }
+
+            var emp_vehicle = document.getElementById("emp_vehicle")
+            if (emp_vehicle.checked) {
+                emp_vehicle = emp_vehicle.value;
+
+            }
+            else {
+                emp_vehicle = 0
+            }
+
+            var ent_report = document.getElementById("ent_report")
+            if (ent_report.checked) {
+                ent_report = ent_report.value;
+
+            }
+            else {
+                ent_report = 0
+            }
+            var dpt_report = document.getElementById("dpt_report")
+            if (dpt_report.checked) {
+                dpt_report = dpt_report.value;
+
+            }
+            else {
+                dpt_report = 0
+            }
+            var cards___history = document.getElementById("cards___history")
+            if (cards___history.checked) {
+                cards___history = cards___history.value;
+
+            }
+            else {
+                cards___history = 0
+            }
+
+            // var maintainace = document.getElementById("maintainace")
+            // if (maintainace.checked) {
+            //     maintainace = maintainace.value;
+
+            // }
+            // else {
+            //     maintainace = 0
+            // }
+
+
+            reports = {
+                fuel_report: fuel_report,
+                et_vehicle: et_vehicle,
+                emp_vehicle: emp_vehicle,
+                ent_report: ent_report,
+                cards___history: cards___history,
+                dpt_report: dpt_report
+                // maintainace: maintainace
+
+            };
+            var reportS = JSON.stringify(reports);
+            //alert(reportS.toString());
+            console.log(reportS);
+
+            var users = {};
+            var user_list = document.getElementById("user_list")
+            if (user_list.checked) {
+                user_list = user_list.value;
+
+            }
+            else {
+                user_list = 0
+            }
+
+            var roles = document.getElementById("roles")
+            if (roles.checked) {
+                roles = roles.value;
+
+            }
+            else {
+                roles = 0
+            }
+
+            users = {
+                user_list: user_list,
+                roles: roles
+                // dept_user: dept_user
+
+            };
+            var userS = JSON.stringify(users);
+            console.log(userS);
+
+
+            var updateVehicle = {};
+            var dashboard = document.getElementById("dashboard")
+            if (dashboard.checked) {
+                dashboard = dashboard.value;
+
+            }
+            else {
+                dashboard = 0
+            }
+
+
+            var allocation = document.getElementById("allocation")
+            if (allocation.checked) {
+                allocation = allocation.value;
+
+            }
+            else {
+                allocation = 0
+            }
+
+            var basi_info = document.getElementById("basi_info")
+            if (basi_info.checked) {
+                basi_info = basi_info.value;
+
+            }
+            else {
+                basi_info = 0
+            }
+
+            // var odometer = document.getElementById("odometer")
+            // if (odometer.checked) {
+            //     odometer = odometer.value;
+
+            // }
+            // else {
+            //     odometer = 0
+            // }
+
+            var fueling = document.getElementById("fueling")
+            if (fueling.checked) {
+                fueling = fueling.value;
+
+            }
+            else {
+                fueling = 0
+            }
+
+            // var Maintainace = document.getElementById("Maintainace")
+            // if (Maintainace.checked) {
+            //     Maintainace = Maintainace.value;
+
+            // }
+            // else {
+            //     Maintainace = 0 stole_veh_driver
+            // }
+
+            var feculty = document.getElementById("feculty")
+            if (feculty.checked) {
+                feculty = feculty.value;
+
+            }
+            else {
+                feculty = 0
+            }
+
+            var stole = document.getElementById("stole_")
+            if (stole.checked) {
+                stole = stole.value;
+
+            }
+            else {
+                stole = 0
+            }
+
+            var veh_driver = document.getElementById("veh_driver")
+            if (veh_driver.checked) {
+                veh_driver = veh_driver.value;
+
+            }
+            else {
+                veh_driver = 0
+            }
+
+
+
+            var create_vehicles = document.getElementById("addd_vehicle")
+            if (create_vehicles.checked) {
+                create_vehicles = create_vehicles.value;
+
+            }
+            else {
+                create_vehicles = 0
+            }
+
+            var res_person = document.getElementById("res_person")
+            if (res_person.checked) {
+                res_person = res_person.value;
+
+            }
+            else {
+                res_person = 0
+            }
+
+            var fleets_cards = document.getElementById("fleets_cards")
+            if (fleets_cards.checked) {
+                fleets_cards = fleets_cards.value;
+
+            }
+            else {
+                fleets_cards = 0
+            }
+
+            var average_ = document.getElementById("average_")
+            if (average_.checked) {
+                average_ = average_.value;
+
+            }
+            else {
+                average_ = 0
+            }
+
+
+            updateVehicle = {
+                dashboard: dashboard,
+                allocation: allocation,
+                basi_info: basi_info,
+                // odometer: odometer,
+                fueling: fueling,
+                // Maintainace: Maintainace,
+                feculty: feculty,
+                stole : stole,
+                veh_driver:veh_driver,
+                create_vehicles:create_vehicles,
+                res_person:res_person,
+                tab_fleets_cards:fleets_cards,
+                average:average_
+
+            };
+            var updateD = JSON.stringify(updateVehicle);
+            console.log(updateD);
+
+            var setups = {};
+            var fuel__rate_profile = document.getElementById("fuel__rate_profile")
+            if (fuel__rate_profile.checked) {
+                fuel__rate_profile = fuel__rate_profile.value;
+
+            }
+            else {
+                fuel__rate_profile = 0
+            }
+
+            var vehicle__make = document.getElementById("vehicle__make")
+            if (vehicle__make.checked) {
+                vehicle__make = vehicle__make.value;
+
+            }
+            else {
+                vehicle__make = 0
+            }
+
+            var fleet__card = document.getElementById("fleet__card")
+            if (fleet__card.checked) {
+                fleet__card = fleet__card.value;
+
+            }
+            else {
+                fleet__card = 0
+            }
+
+
+            setups = {
+                fuel__rate_profile: fuel__rate_profile,
+                vehicle__make: vehicle__make,
+                fleet__card: fleet__card
+                // dept_user: dept_user
+
+            };
+            var setupsS = JSON.stringify(setups);
+            console.log(setupsS);
+
+
+
+            if(rolName!=""){
+                $.ajax({
+                type: 'get',
+                url: '/update__Role?name=' + rolName +'&action='+actionS+ '&main_dash=' + mainDashboard + '&vehicle=' + vehicleS + '&fuelCard=' + cardS + '&gps=' + gpsS + '&report=' + reportS + '&users=' + userS + '&update_vehi=' + updateD+ '&setupsS=' + setupsS+ '&id=' + id,
+                datatype: 'json',
+                success: function (response) {
+                    
+                        swal({
+                            title: 'Saved succesfully',
+                            padding: '2em'
+                        })
+                    
+                    console.log("updated")
+                    // window.location.reload();
+                    window.location.href = "/manage_roles";
+                },
+                error: function (data) {
+                    console.log("Error.", data);
+                }
+            });
+            }
+            else{
+                swal({
+                            title: 'Select Roll Name',
+                            padding: '2em'
+                        })
+            }
+            // '&action='+actionS+
+            
+
+
+
+
+        }
+
+
+        function assign_role() {
+            var role_id = document.getElementById("role").value;
+            var user_id = document.getElementById("username").value;
+            var r_dpt = document.getElementById("r_dpt").value;
+            //alert("han "+r_dpt)
+            if (role_id != "" && user_id != "" && r_dpt !="") {
+                $.ajax({
+                    type: 'get',
+                    url: '/assign_role?role_id=' + role_id + '&user_id=' + user_id + '&r_dpt=' + r_dpt,
+                    datatype: 'json',
+                    success: function (response) {
+                        $("#html5-extension").load(" #html5-extension");
+                        console.log("updated")
+                        $('#role').val(null).trigger('change');
+                        $('#username').val(null).trigger('change');
+                       
+                            swal({
+                                title: 'Saved succesfully',
+                                padding: '2em'
+                            })
+                       
+                        
+                    },
+                    error: function (data) {
+                        console.log("Error.", data);
+                    }
+                });
+            }
+            else{
+                swal({
+                                title: 'Please Select Value First',
+                                padding: '2em'
+                            })
+            }
+
+        }
+
+    </script>
+
+
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+</body>
+
+
+
+<!-- Mirrored from designreset.com/cork/ltr/demo12/starter_kit_alt_menu.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 May 2021 05:27:13 GMT -->
+
+</html>

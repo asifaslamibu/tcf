@@ -1,0 +1,354 @@
+    <!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from designreset.com/cork/ltr/demo12/component_cards.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 May 2021 05:26:24 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>CORK Admin Template - Cards UI Kit</title>
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico"/>
+    <link href="/assets/css/loader.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/js/loader.js"></script>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&amp;display=swap" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/structure.css" rel="stylesheet" type="text/css" class="structure" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- <link href="/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css"> -->
+    <!-- <link href="/plugins/noUiSlider/nouislider.min.css" rel="stylesheet" type="text/css"> -->
+    <!--  BEGIN CUSTOM STYLE FILE  -->
+    <!-- <link href="assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" /> -->
+    <link href="/assets/css/components/cards/card.css" rel="stylesheet" type="text/css" />
+
+    <link href="/plugins/flatpickr/flatpickr.css" rel="stylesheet" type="text/css">
+    <!-- <link href="/plugins/noUiSlider/nouislider.min.css" rel="stylesheet" type="text/css"> -->
+
+    <link href="/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
+    <link href="/plugins/noUiSlider/custom-nouiSlider.css" rel="stylesheet" type="text/css">
+    <link href="/plugins/bootstrap-range-Slider/bootstrap-slider.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/plugins/bootstrap-select/bootstrap-select.min.css">
+
+
+    <!--  END CUSTOM STYLE FILE  -->    
+</head>
+<body class="sidebar-noneoverflow admin-header section-components">
+    
+    <!-- BEGIN LOADER -->
+    <div id="load_screen"> <div class="loader"> <div class="loader-content">
+        <div class="spinner-grow align-self-center"></div>
+    </div></div></div>
+    <!--  END LOADER -->
+
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
+
+        <!--  BEGIN SIDEBAR  -->
+      <%- include("sidebar") %>
+        
+        <!--  END SIDEBAR  -->
+        
+        <!--  BEGIN CONTENT AREA  -->
+        <div id="content" class="main-content">
+            <div class="layout-px-spacing">
+                
+                <div class="content-container">
+
+                    <div class="col layout-top-spacing">
+                        <div class="col-content">
+
+                            <div class="header-container">
+                                <header class="header navbar navbar-expand-sm">                                    
+                                    <div class="d-flex">
+                                        <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom">
+                                            <div class="bt-menu-trigger">
+                                                <span></span>
+                                            </div>
+                                        </a>
+                                        <div class="page-header">
+                                            <div class="page-title">
+                                                <h3>Cards</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="header-actions">
+                                        <div class="nav-item dropdown language-dropdown more-dropdown">
+                                            <%- include("logout") %>
+                                        </div>
+
+                                        <div class="toggle-notification-bar">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                                        </div>
+                                    </div>
+                                </header>
+                            </div>
+
+                            <div class="admin-data-content layout-top-spacing">
+                                <div class="form-container outer">
+                                    <div class="form-form">
+                                        <div class="form-form-wrap">
+                                            <div class="card"  style=" padding: 4%;">
+                                                <div class="form-content">
+                            
+                                                    <h3 class="">New Vehicle</h3>
+                                                    <form class="text-left">
+                                                        <div class="form-row mb-2">
+                            
+                                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                <label class="control-label" for="engine">Registeration Number *</label>
+                                                                <input type="text" class="form-control input-box" placeholder="Registeration Number"
+                                                                    aria-label="reg_number" name="new_reg_number" id="new_reg_number" required>
+                                                            </div>
+                            
+                                                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                <label class="control-label" for="engine">Fuel Type *</label>
+                                                                <select class='form-control selectpicker' name='new_fuel_type' id='new_fuel_type'>
+                                                                    <option value='1'>n/a</option>
+                                                                    <option value='2'>Petrol</option>
+                                                                    <option value='3'>Petrol+CNG</option>
+                                                                    <option value='4'>Diesel</option>
+                                                                </select>
+                                                            </div>
+                                                                </div>
+                                                                <div class="form-row mb-2">
+                                                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <label class="control-label" for="dop">Make *</label>
+                                                                    <input class="form-control input-box" placeholder="Make" type="text" name="new_make"
+                                                                        id="new_make" value="" required />
+                                                                </div>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <label class="control-label" for="dop">Model *</label>
+                                                                    <select class="form-control selectpicker" name="new_model" id="new_model" data-live-search="true">
+                                                                        <option value=2006>2006</option>
+                                                                        <option value=2007>2007</option>
+                                                                        <option value=2008>2008</option>
+                                                                        <option value=2009>2009</option>
+                                                                        <option value=2010>2010</option>
+                                                                        <option value=2011>2011</option>
+                                                                        <option value=2012>2012</option>
+                                                                        <option value=2013>2013</option>
+                                                                        <option value=2014>2014</option>
+                                                                        <option value=2015>2015</option>
+                                                                        <option value=2016>2016</option>
+                                                                        <option value=2017>2017</option>
+                                                                        <option value=2018>2018</option>
+                                                                        <option value=2019>2019</option>
+                                                                        <option value=2020>2020</option>
+                                                                        <option value=2021>2021</option>
+                                                                    </select>
+                                                                </div>
+                                                                </div>
+                                                                <div class="form-row mb-2">
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <label class="control-label" for="dop">Date of Purchase *</label>
+                        
+                                                                    <input id="rangeCalendarFlatpickr" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date..">
+                                                                </div>
+                                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                    <label class="control-label" for="engine">Purchase Price (Rs.)</label>
+                                                                    <input class="form-control input-box" placeholder="Purchase Price" type="number"
+                                                                        step="1000" min="0" max="9999999" name="new_purchase_price" id="new_purchase_price"
+                                                                        value="" />
+                                                                </div>
+                                                                </div>
+                                                                <div class="form-row mb-2">
+                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                        <label class="control-label" for="engine">Registeration State *</label>
+                                                                        <select class='form-control selectpicker' name='new_r_state' id='new_r_state'>
+                                                                            <option value='1'>n/a</option>
+                                                                            <option value='2'>Sindh</option>
+                                                                            <option value='3'>Punjab</option>
+                                                                            <option value='4'>Balochistan</option>
+                                                                            <option value='5'>KPK</option>
+                                                                            <option value='6'>Islamabad</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                        <label class="control-label" for="engine">Date of Registeration *</label>
+                                                          <input id="rangeCalendarFlatpickr12" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date..">
+                                                                    </div>
+                            
+                                                                </div>
+                                                                
+                                                                <div class="form-row mb-2">
+                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                        <label class="control-label" for="engine">Engine Number *</label>
+                                                                        <input class="form-control input-box" placeholder="Engine Number" type="text"
+                                                                            name="new_engine" id="new_engine" />
+                                                                    </div>
+                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                        <label class="control-label" for="engine">Chasis Number *</label>
+                                                                        <input class="form-control input-box" placeholder="Chasis Number" type="text"
+                                                                            name="new_chasis" id="new_chasis" />
+                                                                    </div>
+                                        
+                                                                    
+                                                                </div>
+                                                                
+                                                                <div class="form-row mb-2">
+                            
+                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                        <label class="control-label" for="engine">Vehicle Allocation *</label>
+                                                                        <select class='form-control selectpicker' name='new_function' id="new_function" data-live-search="true">
+                                                                            <option value='1'>Pick and Drop</option>
+                                                                            <option value='2'>Non Functional</option>
+                                                                            <option value='3'>Spare</option>
+                                                                            <option value='4'>AM</option>
+                                                                            <option value='5'>RM</option>
+                                                                            <option value='6'>Stolen</option>
+                                                                            <option value='7'>Area Office</option>
+                                                                            <option value='8'>Region Office</option>
+                                                                            <option value='9'>REM</option>
+                                                                            <option value='10'>AEM</option>
+                                                                            <option value='11'>Auction</option>
+                                                                            <option value='12'>Garage Supervisor</option>
+                                                                            <option value='13'>IT</option>
+                                                                            <option value='14'>RCL</option>
+                                                                            <option value='15'>Awaiting Allocation</option>
+                                                                            <option value='16'>Sold</option>
+                                                                            <option value='17'>Head Office</option>
+                                                                            <option value='18'>ACM</option>
+                                                                            <option value='19'>Police Station</option>
+                                                                            <option value='20'>Requires Maintenance</option>
+                                                                            <option value='21'>Non TCF</option>
+                                                                            <option value='22'>Pool</option>
+                                                                            <option value='23'>Audit</option>
+                                                                            <option value='24'>DFID</option>
+                                                                            <option value='25'>Admin & Compliance Manager</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                        <label class="control-label" for="engine">Capacity *</label>
+                                                                        <input class="form-control input-box" placeholder="Capacity" type="text"
+                                                                            name="new_capacity" id="new_capacity" />
+                                                                    </div>   
+                                                                </div>
+                                                                
+                                                                <div class="form-row mb-2">
+                            
+                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                        <label class="control-label" for="engine">Region *</label>
+                                                                        <select class='form-control selectpicker' id="new_vehicle_region" name="new_vehicle_region" data-live-search="true"
+                                                                            onchange='changeAreaNewVehicle(this.value)'>
+                                                                            <option value='1'>North</option>
+                                                                            <option value='2'>North West</option>
+                                                                            <option value='3'>South</option>
+                                                                            <option value='4'>South West</option>
+                                                                            <option value='5'>GSP North</option>
+                                                                            <option value='6'>GSP Northwest</option>
+                                                                            <option value='7'>Head Office</option>
+                                                                            <option value='8'>TCF College</option>
+                                                                            <option value='9'>PS - North</option>
+                                                                            <option value='10'>PS - South</option>
+                                                                            <option value='11'>Central</option>
+                                                                        </select>
+                                                                    </div>
+                                                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                                                        <label class="control-label" for="engine">Area *</label>
+                                                                        <select class='form-control selectpicker' id="new_vehicle_area"
+                                                                            name="new_vehicle_area">
+                                                                            <option value="">No Data</option>
+                                                                        </select>
+                                                                    </div>  
+                                                                </div>
+                                                                
+                                                          
+                            
+                                                            <div class="field-wrapper terms_condition mb-2">
+                                                                <div class="n-chk">
+                                                                    <label class="new-control new-checkbox checkbox-primary">
+                                                                      <input type="checkbox" class="new-control-input">
+                                                                      <span class="new-control-indicator"></span><span>I agree to the <a href="javascript:void(0);">  terms and conditions </a></span>
+                                                                    </label>
+                                                                </div>
+                            
+                                                            </div>
+                            
+                                                            <div class="d-sm-flex justify-content-between mb-2">
+                                                                <div class="field-wrapper">
+                                                                    <button type="submit" class="btn btn-primary" value="">Get Started!</button>
+                                                                </div>
+                                                            </div>
+                            
+                                                                                   
+                            
+                                                        </div>
+                                                    </form>
+                            
+                                                </div>                    
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                            </div>
+                            
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+            
+        </div>
+        <!--  END CONTENT AREA  -->
+    </div>
+    <!-- END MAIN CONTAINER -->
+    
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="/assets/js/libs/jquery-3.1.1.min.js"></script>
+    <script src="/bootstrap/js/popper.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/plugins/blockui/jquery.blockUI.min.js"></script>
+    <script src="/assets/js/app.js"></script>    
+    <script src="/assets/js/scrollspyNav.js"></script>
+    
+    
+
+    
+    
+    
+    <script>
+        
+
+        $(document).ready(function() {
+            App.init();
+        });
+    </script>
+    <script src="/plugins/highlight/highlight.pack.js"></script>
+    <script src="/assets/js/custom.js"></script>
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+
+    <!--  BEGIN CUSTOM SCRIPTS FILE  -->
+    
+    
+    <script src="/assets/js/scrollspyNav.js"></script>
+    <script src="/plugins/flatpickr/flatpickr.js"></script>
+    <script src="/plugins/noUiSlider/nouislider.min.js"></script>
+
+    <script src="/plugins/flatpickr/custom-flatpickr.js"></script>
+    <script src="/plugins/noUiSlider/custom-nouiSlider.js"></script>
+    <script src="/plugins/bootstrap-range-Slider/bootstrap-rangeSlider.js"></script>
+    <script src="/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+
+    <script>
+        
+var f2 = flatpickr(document.getElementById('rangeCalendarFlatpickr'), {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+});
+
+var f12 = flatpickr(document.getElementById('rangeCalendarFlatpickr12'), {
+    enableTime: true,
+    dateFormat: "Y-m-d H:i",
+});
+    </script>
+</body>
+
+<!-- Mirrored from designreset.com/cork/ltr/demo12/component_cards.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 May 2021 05:26:25 GMT -->
+</html>

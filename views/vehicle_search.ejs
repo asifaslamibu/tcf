@@ -1,0 +1,24 @@
+<link href="/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/plugins/bootstrap-select/bootstrap-select.min.css">
+
+<span>
+    <select class="selectpicker" data-live-search="true">
+        <option>Search Reg Number</option>
+        <% for (const i in data13) {
+            %>
+            <option value="<%= data13[i].id%>"><%= data13[i].reg_number%></option>
+            <%
+          }
+          %>
+        
+    </select>
+
+</span>
+        
+
+    
+
+
+
+<script src="/assets/js/scrollspyNav.js"></script>
+<script src="/plugins/bootstrap-select/bootstrap-select.min.js"></script>

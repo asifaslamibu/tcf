@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from designreset.com/cork/ltr/demo12/starter_kit_alt_menu.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 May 2021 05:27:13 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>Map</title>
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico"/>
+    <link href="/assets/css/loader.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/js/loader.js"></script>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&amp;display=swap" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/structure.css" rel="stylesheet" type="text/css" class="structure" />
+    <link href="/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
+    <link href="/plugins/noUiSlider/custom-nouiSlider.css" rel="stylesheet" type="text/css">
+    <link href="/plugins/bootstrap-range-Slider/bootstrap-slider.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/pages/contact_us.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/elements/search.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+
+    <script
+ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIwxXlGaEfq5crr2GnLzTRVUoIdR-WhEM&callback=initMap&libraries=&v=weekly"
+ defer></script>
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+
+    <style>
+        /*
+            The below code is for DEMO purpose --- Use it if you are using this demo otherwise Remove it
+        */
+        .navbar .navbar-item.navbar-dropdown {
+            margin-left: auto;
+        }
+
+
+        .alt-menu #content .col-right {
+            position: fixed;
+            top: 0;
+            width: 310px;
+            right: -380px;
+            border-radius: 0;
+            z-index: 1029!important;
+            transition: .3s ease all;
+            width: 348px;
+        }
+        .alt-menu #content .col-right.show {
+            right: 0;
+        }
+        .alt-menu.admin-header .toggle-notification-bar {
+            display: block;
+            cursor: pointer;
+        }
+        .alt-menu.overlay.show {
+            display: block;
+            opacity: .7;
+        }
+        .alt-menu.admin-header .toggle-notification-bar svg {
+            width: 19px;
+            height: 19px;
+            stroke-width: 1.6px;
+        }
+        .alt-menu .col-right-content .col-right-content-container {
+            position: relative;
+            height: calc(100vh - 92px);
+            padding: 0 0 0 0;
+        }
+
+        #content .col-left {
+            margin-right: 0;
+        }
+
+        @media (max-width: 399px) {
+            .alt-menu .col-right-content .col-right-content-container {
+                padding-right: 15px;
+            }
+        }
+
+        /*
+            Just for demo purpose ---- Remove it.
+        */
+        /*<starter kit design>*/
+
+        .widget-one {
+
+        }
+        .widget-one h6 {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0px;
+            margin-bottom: 22px;
+        }
+        .widget-one p {
+            font-size: 15px;
+            margin-bottom: 0;
+        }
+
+        .searchable-container .items{
+            min-width: 0 !important;
+        }
+        .searchable-container .items{
+            background-color: #151516;
+            
+        }
+        .user-name span{
+            color: #fff;
+        }
+        .form-control{
+            background-color: #151516;
+            color: #fff !important;
+
+        }
+        .form-control:focus{
+            background-color: #151516 !important;
+
+        }
+        .searchable-items{
+            border: none;
+        }
+        .online-actions{
+            display: none !important;
+        }
+        #basic_map1{
+            height: 85vh !important ;
+        }
+        .widget-message{
+            padding: 22px 50px !important;
+        }
+        .widget-message .widget-messages .w-message .w-msg-text{
+          width: 100px !important;
+        }
+        
+    </style>
+
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+
+</head>
+<body class="sidebar-noneoverflow starterkit admin-header alt-menu" >
+
+    <!-- BEGIN LOADER -->
+    <div id="load_screen"> <div class="loader"> <div class="loader-content">
+        <div class="spinner-grow align-self-center"></div>
+    </div></div></div>
+    <!--  END LOADER -->
+
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
+
+        <!--  BEGIN SIDEBAR  -->
+        <%- include("sidebar") %>
+        <!--  END SIDEBAR  -->
+        
+        <!--  BEGIN CONTENT AREA  -->
+        <div id="content" class="main-content">
+            <script>
+                var arr = [];
+                var arr2 = [];
+                var schools = [];
+            </script>
+             <% for (const i in data2) {
+                %>
+                <script>
+                var lng="<%= data2[i].Longitude_Value %>";
+                var lat="<%= data2[i].Latitude_Value %>" ;
+                schools.push({ lati:lat,lngi:lng});
+                
+                </script>
+               <% 
+
+            }%>
+            <script>
+                console.log(schools)
+            </script>
+            <div class="layout-px-spacing">
+                <% if(data1.length!=0){ var i=1; data1.forEach(function(data){ %>
+                <div class="content-container">
+
+                    <div class="col-left layout-top-spacing">
+                        <div class="col-left-content">
+
+                          <div class="header-container">
+                            <header class="header navbar navbar-expand-sm">                                    
+                                <div class="d-flex">
+                                    <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom">
+                                        <div class="bt-menu-trigger">
+                                            <span></span>
+                                        </div>
+                                    </a>
+                                    <div class="page-header">
+                                        <div class="page-title">
+                                            <h3>Create route of ( <%=data.reg_number %> )</h3>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="d-flex">
+                                   
+                                    <div class="col-md-12" style="padding-left:0 ;">
+    
+                                        <label class="radio-inline" style="color: #686868;">
+                                          <input type="date" id="to_date" name="to_date"><span style=" margin-left: 9px;font-size: 15px; color: #686868; letter-spacing: .03rem;">   To</span> 
+                                        </label>
+                                        <!-- <label for="colFormLabelSm" class="col-sm-2 col-form-label col-form-label-sm ">To</label>
+                                        <div class="col-sm-10">
+                                            <input id="to_date" name="to_date" class="form-control flatpickr flatpickr-input active" type="text" placeholder="Select Date.." onchange="check_rate(this.value)">
+                                                                                    
+                                        </div> -->
+                                    </div>
+                                    
+                                </div>
+                                <div class="d-flex">
+                                   
+                                    <div class="col-md-12" style="padding-left:0 ;">
+    
+                                        <label class="radio-inline" style="color: #686868; ">
+                                          <input type="date" id="from_date" name="from_date" >  <span style=" margin-left: 9px;font-size: 15px; color: #686868; letter-spacing: .03rem;">   from</span> 
+                                        </label>
+                                    </div>
+                                    
+                                </div>
+                                
+
+                                <div class="d-flex">
+                                   
+                                    <div class="col-md-12" style="padding-left:0 ;">
+    
+                                        <button onclick="myFunction()" class="btn tbn-light"  id="myBtn_line"> Custom Route</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="d-flex">
+                                   
+                                    <div class="col-md-12" style="padding-left:0 ;">
+    
+                                        <button id="remove-line" type="button" class="btn tbn-light" style="display: none;"> Remove line</button>
+                                    </div>
+                                    
+                                </div>
+
+                                <div class="header-actions">
+                                    <div class="nav-item dropdown language-dropdown more-dropdown">
+                                        <%- include("logout") %>
+                                    </div>
+
+                                    
+                                </div>
+                            </header>
+                        </div>
+
+                            <div class="admin-data-content layout-top-spacing">
+
+                                <!-- <div class="alert alert-light-success border-0 mb-4" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="alert"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button> <strong>Note :- </strong> Please apply your Google API in order to make Maps work properly. </div> -->
+
+                                <div class="contact-us">
+                                    <div class="cu-contact-section"> 
+                                        
+                                        
+
+
+                                            <script>
+                                                var lat1 = "<%=data.f_lat %>";
+                                                var id = "<%=data.id %>";
+                                                 var fname = "<%=data.reg_number %>";
+                                                 var time1 = "<%= data.f_reportingtime%>";
+                                                 var driver_name = "<%= data.driver_name%>";
+                                                //  alert(driver_name)
+                                                var time = new Date(time1);
+                                                var formatTime = time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+                                                var name1 = '<div class="container" style="width: 400px; height: 300px; overflow:auto "><div class="row"><div class="col-md-12"><p style="font-weight: bold; color:#000;text-align:center"><%=data.f_vehnum %></p><div class="row"><div class="col-md-12"><label for="" style="width: 33.33%; font-size: 12px; color:#000">Last Update:</label><span style="color: #000;">'+formatTime+'</span></div><div class="col-md-12"><label for=""style="width: 33.33%; font-size: 12px;  color:#000">Speed :</label><span style="color: #000;"><%=data.f_speed %> km/h</span></div><div class="col-md-12"><label for=""style="width: 33.33%; font-size: 12px;  color:#000">Driver Name :</label><span style="color: #000;"><%=data.driver_name %> </span></div><div class="col-md-12"><img alt="User Pic" width="300px" src="http://fmsuat.tcf.org.pk:3000/uploads/images/<%=data.image%>"> </span></div></div></div></div></div>';
+                                                var lng1 = "<%=data.f_lng %>";
+                                                var speed = "<%=data.f_speed %>";
+                                                var round = Math.round(speed);
+                                                //console.log(lat+","+lng+","+name1);
+                                                arr.push({ val: lat1 + "," + lng1 + "," + name1, text: lat1 + "," + lng1 });
+                                                arr2.push([name1, lat1, lng1, id, speed],);
+                                                // var attribute = "<%=data.attributes%>";
+                                                 
+                                                // var att = JSON.parse((JSON.stringify(attribute)));
+                                               // console.log("attributes==>"+attribute);
+                                                //  console.log("att"+att);
+                                                // var emileage = att.odometer;
+                                                // console.log("emile==>"+emileage);
+
+                                                function custom_route(){
+                                                    location.href = '/custom_route/'+fname+'';
+                                                }
+
+
+
+
+
+
+                                            </script>
+                                            <% i++; }) %>
+                                                <% } else{ }%>
+                                        
+                                        <div id="basic_map1"></div>
+                                    </div>
+                                </div>
+                          </div>
+                            
+                        </div>
+                    </div>
+                    
+
+                </div>
+            </div>
+            
+        </div>
+        <!--  END CONTENT AREA  -->
+    </div>
+    <!-- END MAIN CONTAINER -->
+
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="/assets/js/libs/jquery-3.1.1.min.js"></script>
+    <script src="/bootstrap/js/popper.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script>
+        $(document).ready(function() {
+            App.init();
+        });
+
+        $(function(){
+            var dtToday = new Date();
+            
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate();
+            var year = dtToday.getFullYear();
+            if(month < 10)
+                month = '0' + month.toString();
+            if(day < 10)
+                day = '0' + day.toString();
+            
+            var maxDate = year + '-' + month + '-' + day;
+            $('#to_date').attr('max', maxDate);
+        });
+
+        $(function(){
+            var dtToday = new Date();
+            
+            var month = dtToday.getMonth() + 1;
+            var day = dtToday.getDate();
+            var year = dtToday.getFullYear();
+            if(month < 10)
+                month = '0' + month.toString();
+            if(day < 10)
+                day = '0' + day.toString();
+            
+            var maxDate = year + '-' + month + '-' + day;
+            $('#from_date').attr('max', maxDate);
+        });
+    </script>
+    
+
+
+    
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <script src="/assets/js/custom.js"></script>
+    <!-- <script src="assets/js/scrollspyNav.js"></script> -->
+
+     <script src="/plugins/flatpickr/custom-flatpickr.js"></script>
+
+    <script src="/plugins/noUiSlider/custom-nouiSlider.js"></script>
+    <script src="/plugins/bootstrap-range-Slider/bootstrap-rangeSlider.js"></script>
+    <script src="/plugins/highlight/highlight.pack.js"></script>
+
+    <script src="/assets/js/elements/custom-search.js"></script>
+    <script src="/assets/js/scrollspyNav.js"></script>
+
+
+
+ <script>
+           var f3 = flatpickr(document.getElementById('rangeCalendarFlatpickr'), {
+    mode: "range"
+});
+ </script>
+
+<script>
+
+    var lastOdometer,firstOdometer,addassetOdometer,resultOdometer,addassetOdo,runOdometer;
+
+    let map;
+    var marker;
+    var stop2;
+    var flightPath1,flightPath2,flightPath3;
+    var marker1,marker2,marker3;
+    var marker11,marker22,marker33;
+    var flag;
+    let stop3array = [];
+    let stop2array = [];
+    let stop1array = [];
+    let flag3array = [];
+    let flag2array = [];
+    let flag1array = [];
+    $('#today').change(function() {
+ if( $('#today').prop("checked")) {
+     //alert("Today Checked");
+     
+         myFunction();
+          }
+          else  {
+            
+            setMapOnAll1(null);
+        //   setMapOnAll1flag(null);
+          console.log("Today unchecked");
+          flightPath1.setMap(null);
+          
+          }
+});
+$('#yesterday').change(function() {
+ if( $('#yesterday').prop("checked")) {
+     //alert("yesterday Checked");
+     
+         myFunction2('true');
+          }
+          else  {
+          flightPath2.setMap(null);
+          setMapOnAll2(null);
+        //   setMapOnAll2flag(null);
+          }
+});
+$('#threeday').change(function() {
+ if( $('#threeday').prop("checked")) {
+     //alert("yesterday Checked");
+     
+         myFunction3();
+          }
+          else  
+          {
+            flightPath3.setMap(null);
+            setMapOnAll3(null);
+          }
+});
+function setMapOnAll2(map) {
+  for (let i = 0; i < stop2array.length; i++) {
+    stop2array[i].setMap(map);
+  }
+  
+}
+function setMapOnAll1(map) {
+  for (let i = 0; i < stop1array.length; i++) {
+    stop1array[i].setMap(map);
+  }
+  
+}
+function setMapOnAll1flag(map)
+{
+    for (let i = 0; i < flag1array.length; i++) 
+    {
+    flag1array[i].setMap(map);
+  }
+}
+function setMapOnAll3(map) {
+  for (let i = 0; i < stop3array.length; i++) {
+    stop3array[i].setMap(map);
+  }
+  
+}
+
+
+    
+    function getHeight() {
+            var getMapElement = document.getElementById('basic_map1');
+            var getWindowHeight = window.innerHeight;
+            var setHeightOfMap = getMapElement.style.height = getWindowHeight + 'px';
+
+        }
+        getHeight();
+
+        window.addEventListener('resize', function(event){
+          getHeight();
+        })
+
+    function initMap() {
+
+        // console.log(arr2);
+
+        gmarkers = [];
+        var lati = new google.maps.LatLng(lat1, lng1)
+        map = new google.maps.Map(document.getElementById("basic_map1"), {
+            center: lati,
+            zoom: 17,
+        });
+        var infowindow1 = new google.maps.InfoWindow();
+        console.log(schools);
+    var locations_school = schools;
+     for (i = 0; i < locations_school.length; i++) { 
+        var pinColor = "FE7569";
+        
+        var pinImage = new google.maps.MarkerImage("http://maps.google.com/mapfiles/kml/shapes/ranger_station.png",
+        new google.maps.Size(100, 100),
+        new google.maps.Point(0,0),
+        new google.maps.Point(14, 14));
+        const image = "/assets/school.png";
+        marker = new google.maps.Marker({        
+          position: new google.maps.LatLng(locations_school[i].lati, locations_school[i].lngi),
+          map: map,
+          icon: image,
+          
+        }); 
+        
+
+        google.maps.event.addListener(marker, 'click', (function(marker, i) {
+        return function() {
+         
+            
+  infowindow1.setContent( );
+          infowindow1.setContent( "<strong>Long.: </strong>" + locations_school[i].address.lng+"<br><strong>Latt: </strong>" + locations_school[i].address.lat +"<br><strong>ecomp: </strong>" + locations_school[i]['EComp']);
+          infowindow1.open(map, marker);
+        }
+      })(marker, i));
+    }
+        
+        
+        var infowindow = new google.maps.InfoWindow();
+        const image = "/car_stopped.png";
+        const fimage = "/car_travelling.png";
+        const mark = (speed > 0) ? fimage : image;
+        function createMarker(latlng, html) {
+            marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                icon: mark
+            });
+
+            map.addListener('click', function (e) {
+               // animatedMove(marker, .15, marker.position, e.latLng);
+            });
+            google.maps.event.addListener(marker, 'click', function () {
+                infowindow.setContent(html);
+                infowindow.open(map, marker);
+            });
+            
+            // google.maps.event.addListener(marker, 'mouseover', function () {
+            //     infowindow.setContent(html);
+            //     infowindow.open(map, marker);
+            // });
+            // google.maps.event.addListener(marker, 'mouseout', function () {
+            //     infowindow.setContent(html);
+            //     infowindow.close();
+            // });
+            return marker;
+        }
+
+
+        createMarker(new google.maps.LatLng(lat1, lng1), name1);
+        var lati;
+        var lngi;
+        
+        
+    }
+    
+    
+    function myFunction() {
+        // let url_str = window.location.href;
+        // flightPath1.setMap(null);
+        var url = window.location.href;
+        var id = url.substring(url.lastIndexOf('/') + 1);
+        var to_date = document.getElementById("to_date").value;
+        var from_date = document.getElementById("from_date").value;
+        // alert("tp "+to_date + " from " + from_date);
+        if(to_date!="" && from_date!=""){
+            var arrs = [];
+        // get value of "id" parameter
+        // "100"
+        const lineSymbol = {
+            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+        };
+        
+       
+        $.get('/custom_line?id=' + id +'&to='+to_date+'&from='+from_date, function (data) {
+            var flightPlanCoordinates = [];
+            
+            var overspeed = [];
+            data.forEach(obj => {
+                var lat = obj['f_lat'];
+                var lng = obj['f_lng'];
+                // alert(lat)
+                
+
+                
+                var lat = parseFloat(lat)
+                var lng = parseFloat(lng)
+                
+                arrs.push({ lat, lng });
+                console.log(arrs)
+
+                
+            });
+            document.getElementById("remove-line").addEventListener("click", removeLine);
+            
+            // flightPath1.setMap(null);
+            setMapOnAll1(null);
+            setMapOnAll1(map);
+            flightPath1 = new google.maps.Polyline({
+                path: arrs,
+                geodesic: true,
+                strokeColor: "#800080",
+                strokeOpacity: 1.0,
+                strokeWeight: 2,
+                icons: [
+                    {
+                        icon: lineSymbol,
+                        offset: "100%",
+                        repeat: '30px',
+                    },
+                ],
+            });
+            
+                //console.log("data comes");
+                flightPath1.setMap(map);
+            
+            
+        });
+        }
+        else{
+            alert("Please select date")
+        }
+        
+        document.getElementById("myBtn_line").disabled = true;
+        document.getElementById("remove-line").style.display="block";
+    }
+    function removeLine() {
+  flightPath1.setMap(null);
+  document.getElementById("myBtn_line").disabled = false;
+  document.getElementById("remove-line").style.display="none";
+
+
+}
+
+
+    function myFunction2() {
+        // let url_str = window.location.href;
+
+        var url = window.location.href;
+var id = url.substring(url.lastIndexOf('/') + 1);
+        var arrs = [];
+        // get value of "id" parameter
+        // "100"
+        const lineSymbol = {
+            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+        };
+        
+       
+        $.get('/yesterday?id=' + id , function (data) {
+            var flightPlanCoordinates = [];
+            
+            var overspeed = [];
+            data.forEach(obj => {
+                var lat = obj['f_lat'];
+                var lng = obj['f_lng'];
+                // alert(lat)
+                
+
+                
+                var lat = parseFloat(lat)
+                var lng = parseFloat(lng)
+                
+                arrs.push({ lat, lng });
+                console.log(arrs)
+
+                
+            });
+            
+            
+            setMapOnAll2(map);
+            flightPath2 = new google.maps.Polyline({
+                path: arrs,
+                geodesic: true,
+                strokeColor: "#800080",
+                strokeOpacity: 1.0,
+                strokeWeight: 2,
+                icons: [
+                    {
+                        icon: lineSymbol,
+                        offset: "100%",
+                        repeat: '30px',
+                    },
+                ],
+            });
+            
+                //console.log("data comes");
+                flightPath2.setMap(map);
+            
+            // if($('#today').attr('checked')) 
+            // {
+                
+            // }
+            
+            // flightPath.setMap(map);
+        });
+
+    }
+
+    function myFunction3() {
+        // let url_str = window.location.href;
+
+        var url = window.location.href;
+var id = url.substring(url.lastIndexOf('/') + 1);
+        var arrs = [];
+        // get value of "id" parameter
+        // "100"
+        const lineSymbol = {
+            path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW,
+        };
+        
+       
+        $.get('/line_three?id=' + id , function (data) {
+            var flightPlanCoordinates = [];
+            
+            var overspeed = [];
+            data.forEach(obj => {
+                var lat = obj['f_lat'];
+                var lng = obj['f_lng'];
+                // alert(lat)
+                
+
+                
+                var lat = parseFloat(lat)
+                var lng = parseFloat(lng)
+                
+                arrs.push({ lat, lng });
+                console.log(arrs)
+
+                
+            });
+            
+            
+            setMapOnAll3(map);
+            flightPath3 = new google.maps.Polyline({
+                path: arrs,
+                geodesic: true,
+                strokeColor: "#800080",
+                strokeOpacity: 1.0,
+                strokeWeight: 2,
+                icons: [
+                    {
+                        icon: lineSymbol,
+                        offset: "100%",
+                        repeat: '30px',
+                    },
+                ],
+            });
+            
+                //console.log("data comes");
+                flightPath3.setMap(map);
+            
+            
+        });
+
+    }
+
+
+
+
+
+
+
+</script>
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+</body>
+
+<!-- Mirrored from designreset.com/cork/ltr/demo12/starter_kit_alt_menu.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 May 2021 05:27:13 GMT -->
+</html>

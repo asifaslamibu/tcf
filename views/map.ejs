@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from designreset.com/cork/ltr/demo12/starter_kit_alt_menu.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 May 2021 05:27:13 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>Map</title>
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico"/>
+    <link href="/assets/css/loader.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/js/loader.js"></script>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&amp;display=swap" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/structure.css" rel="stylesheet" type="text/css" class="structure" />
+    <link href="/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/flatpickr/custom-flatpickr.css" rel="stylesheet" type="text/css">
+    <link href="/plugins/noUiSlider/custom-nouiSlider.css" rel="stylesheet" type="text/css">
+    <link href="/plugins/bootstrap-range-Slider/bootstrap-slider.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/pages/contact_us.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/elements/search.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+
+    <script
+ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIwxXlGaEfq5crr2GnLzTRVUoIdR-WhEM&callback=initMap&libraries=&v=weekly"
+ defer></script>
+ <script src="/assets/js/libs/jquery-3.1.1.min.js"></script>
+
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+
+    <style>
+        /*
+            The below code is for DEMO purpose --- Use it if you are using this demo otherwise Remove it
+        */
+        .navbar .navbar-item.navbar-dropdown {
+            margin-left: auto;
+        }
+
+
+        .alt-menu #content .col-right {
+            position: fixed;
+            top: 0;
+            width: 310px;
+            right: -380px;
+            border-radius: 0;
+            z-index: 1029!important;
+            transition: .3s ease all;
+            width: 348px;
+        }
+        .alt-menu #content .col-right.show {
+            right: 0;
+        }
+        .alt-menu.admin-header .toggle-notification-bar {
+            display: block;
+            cursor: pointer;
+        }
+        .alt-menu.overlay.show {
+            display: block;
+            opacity: .7;
+        }
+        .alt-menu.admin-header .toggle-notification-bar svg {
+            width: 19px;
+            height: 19px;
+            stroke-width: 1.6px;
+        }
+        .alt-menu .col-right-content .col-right-content-container {
+            position: relative;
+            height: calc(100vh - 92px);
+            padding: 0 0 0 0;
+        }
+
+        #content .col-left {
+            margin-right: 0;
+        }
+
+        @media (max-width: 399px) {
+            .alt-menu .col-right-content .col-right-content-container {
+                padding-right: 15px;
+            }
+        }
+
+        /*
+            Just for demo purpose ---- Remove it.
+        */
+        /*<starter kit design>*/
+
+        .widget-one {
+
+        }
+        .widget-one h6 {
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: 0px;
+            margin-bottom: 22px;
+        }
+        .widget-one p {
+            font-size: 15px;
+            margin-bottom: 0;
+        }
+
+        .searchable-container .items{
+            min-width: 0 !important;
+        }
+        .searchable-container .items{
+            background-color: #151516;
+            
+        }
+        .user-name span{
+            color: #fff;
+        }
+        .form-control{
+            background-color: #151516;
+            color: #fff !important;
+
+        }
+        .form-control:focus{
+            background-color: #151516 !important;
+
+        }
+        .searchable-items{
+            border: none;
+        }
+        .online-actions{
+            display: none !important;
+        }
+        #basic_map1{
+            height: 85vh !important ;
+        }
+        .widget-message{
+            padding: 22px 50px !important;
+        }
+        .widget-message .widget-messages .w-message .w-msg-text{
+          width: 100px !important;
+        }
+        .widget-message .widget-messages .w-message img{
+            border: none;
+        }
+
+        .map-marker-label {
+        position: absolute;
+        color: #000;
+        font-size: 16px;
+        /* font-weight: bold; */
+        background:#fff;
+        padding:7px;
+        margin-left: -20px;
+        /* margin-top:5px; */
+        border-radius:5px;
+        border:1px solid #000;
+         }
+        
+
+    </style>
+
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+
+</head>
+<body class="sidebar-noneoverflow starterkit admin-header alt-menu">
+
+    <!-- BEGIN LOADER -->
+    <div id="load_screen"> <div class="loader"> <div class="loader-content">
+        <div class="spinner-grow align-self-center"></div>
+    </div></div></div>
+    <!--  END LOADER -->
+
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
+
+        <!--  BEGIN SIDEBAR  -->
+        <%- include("mapsidebar") %>
+        <!--  END SIDEBAR  -->
+<script>
+        var schools = [];
+
+</script>
+<!--  -->
+        <!--  BEGIN CONTENT AREA  -->
+        <div id="content" class="main-content">
+            <div class="layout-px-spacing">
+                
+                <div class="content-container">
+
+                    <div class="col-left layout-top-spacing">
+                        <div class="col-left-content">
+
+                          <div class="header-container">
+                            <header class="header navbar navbar-expand-sm">                                    
+                                <div class="d-flex">
+                                    <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom">
+                                        <div class="bt-menu-trigger">
+                                            <span></span>
+                                        </div>
+                                    </a>
+                                    <div class="page-header">
+                                        <div class="page-title">
+                                            <h3>Map</h3>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="header-actions">
+                                    <div class="nav-item dropdown language-dropdown more-dropdown">
+                                        <%- include("logout") %>
+                                    </div>
+
+                                    <div class="toggle-notification-bar">
+                                      <img src="/assets/img/car.svg" alt=""width="24" height="24">
+                                        
+                                    </div>
+                                </div>
+                            </header>
+                        </div>
+
+                            <div class="admin-data-content layout-top-spacing">
+
+                                <!-- <div class="alert alert-light-success border-0 mb-4" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x close" data-dismiss="alert"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button> <strong>Note :- </strong> Please apply your Google API in order to make Maps work properly. </div> -->
+
+                                <div class="contact-us">
+                                    <div class="cu-contact-section">                           
+                                        <div id="basic_map1"></div>
+                                    </div>
+                                </div>
+                          </div>
+                            
+                        </div>
+                    </div>
+                    <div class="col-right">
+                        <div class="col-right-content">
+                            <div class="navbar-item flex-row search-ul navbar-dropdown">
+                                
+
+                                <div class="navbar-item flex-row search-ul navbar-dropdown">
+                                    <div class="nav-item align-self-center search-animated show-search">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search toggle-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                                        <form class="form-inline search-full form-inline search input-focused" role="search">
+                                            <div class="search-bar">
+                                                <input type="text" style="width: 250px !important;" class="w-100 form-control search-form-control  ml-lg-auto" id="input-search" placeholder="Search...">
+                                                <!-- <input type="text" class="w-100 form-control product-search br-30" id="input-search" placeholder="Search Attendees..." > -->
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-right-content-container">
+
+                                <div class="activity-section">
+                                    <script>
+                                        var arr = [];
+                                        var arr2 = [];
+                                        var name12,id,lat,lng,speed,time;
+                                    </script>
+                                    <div class="searchable-container">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                              
+                                                <div class="searchable-items">
+                                                  <% for (const i in data1) {
+                                                    %>
+                                                    
+                                                    <div class="items" style="background-color: #15151600; margin: 0 auto !important; padding: 0;">
+                                                        
+                                                        <div class="user-name">
+                                                            <div class="widget-message">
+                                                                <div class="widget-title">
+                                                                 
+                                                                    <h5><%= data1[i].reg_number%></h5>
+                                                                    <a href="javascript:google.maps.event.trigger(window.location.href = '/run/<%= data1[i].reg_number%>' ,'dblclick');">
+                                                                        
+                                                                        <i class="fas fa-crosshairs text-white " aria-hidden="true"
+                                                                    style="font-size: 20px; font-weight: 1; "></i>
+                                                                    </a>
+                                                                </div>
+                        
+                                                                <div class="widget-messages">
+                                                                    <a href="#" class="w-message">
+                                                                        <img src="/car.svg" alt="" class="img-fluid">
+                                                                        <div class="msg-content">
+                                                                            <h5 class="w-msg-username"><%= data1[i].f_speed%> km/hr</h5>
+                                                                            
+                                                                            <h6 class="w-msg-text " id="<%= data1[i].deviceid%>"></h6>
+                                                                            <h6 class="w-msg-text">Region: <%= data1[i].region_name %></h6>
+                                                                            <h6 class="w-msg-text">Area: <%= data1[i].area_name %></h6>
+                                                                        
+                                                                           
+
+                                                                            
+                                                                        </div>
+                                                                    </a>
+                        
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <script>
+                                                        var name12 ;
+                                                        var id = "<%= data1[i].deviceid%>";
+                                                        var carName = "<%= data1[i].reg_number%>";
+                                                        var lat = "<%= data1[i].f_lat%>";
+                                                        var lng = "<%= data1[i].f_lng%>";
+                                                        var speed = "<%= data1[i].f_speed%>";
+                                                        var time1 = "<%= data1[i].f_reportingtime%>";
+                                                        var time = new Date(time1);
+                                                        var formatTime = time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+                                                        console.log("12 time "+ formatTime)
+                                                         name12 = '<div class="container" style="width: 100%; height: auto; "><div class="row"><div class="col-md-12"><p style="font-weight: bold; color:#000;text-align:center">'+carName+'</p><div class="row"><div class="col-md-12"><label for="" style="width: 33.33%; font-size: 12px; color:#000">Last Update:</label><span style="color: #000;">'+time+'</span></div><div class="col-md-12"><label for=""style="width: 33.33%; font-size: 12px;  color:#000">Speed :</label><span style="color: #000;">'+speed+' km/h</span></div></div></div></div></div>';
+                                                        arr.push({ val: lat + "," + lng + "," + name12, text: lat + "," + lng });
+                                                        arr2.push([name12, lat, lng, id, carName,speed]);
+                                                        if(speed>0){
+                                                                    document.getElementById("<%= data1[i].deviceid%>").innerHTML="Moving" ;
+                                                                }
+                                                                else
+                                                                {
+                                                                    document.getElementById("<%= data1[i].deviceid%>").innerHTML="Parked";
+                                                            }
+                                                        // function myFunction(car_id){
+                                                        //     $.get('/listdata?id=' + car_id + '', function (recordset) {
+                                                        //         id = recordset["recordsets"][0][0]["id"];
+                                                        //         carName = recordset["recordsets"][0][0]["f_vehnum"];
+                                                        //         console.log("Car Name "+carName);
+                                                        //         lat = recordset["recordsets"][0][0]["f_lat"];
+                                                        //         lng = recordset["recordsets"][0][0]["f_lng"];
+                                                        //         speed = recordset["recordsets"][0][0]["f_speed"]
+                                                                
+                                                        //         console.log("Car speed "+speed);
+                                                        //         ;
+                                                        //         time = recordset["recordsets"][0][0]["f_reportingtime"];
+                                                        //         name12 = '<div class="container" style="width: 100%; height: auto; "><div class="row"><div class="col-md-12"><p style="font-weight: bold; color:#000;text-align:center">'+carName+'</p><div class="row"><div class="col-md-12"><label for="" style="width: 33.33%; font-size: 12px; color:#000">Last Update:</label><span style="color: #000;">'+time+'</span></div><div class="col-md-12"><label for=""style="width: 33.33%; font-size: 12px;  color:#000">Speed :</label><span style="color: #000;">'+speed+' km/h</span></div></div></div></div></div>';
+                                                        //         arr.push({ val: lat + "," + lng + "," + name12, text: lat + "," + lng });
+                                                        //         arr2.push([name12, lat, lng, id, carName,speed]);
+
+                                                        //         if(speed>0){
+                                                        //             document.getElementById("<%= data1[i].f_id%>").innerHTML="Moving "+speed + "km/h" ;
+                                                        //         }
+                                                        //         else
+                                                        //         {
+                                                        //             document.getElementById("<%= data1[i].f_id%>").innerHTML="Parked";
+                                                        //         }
+
+
+                                                        //         // function set(lat, lng) {
+
+                                                        //         //     map.setCenter(new google.maps.LatLng(lat, lng));
+
+                                                        //         // }
+                                                                 
+
+                                                                        
+                                                                        
+                                                        //             })
+                                                                    
+                                                        //         }
+                                                                
+                                                        // // console.log("id ==> "+ id);
+                                                        
+                                                        // myFunction(id1);
+                                                    </script>
+                                                    
+                                                    <%
+                                              }
+                                              %>
+                                                  </div>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+                                    
+                                </div>
+
+                            </div>
+                            
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+        <!--  END CONTENT AREA  -->
+    </div>
+    <!-- END MAIN CONTAINER -->
+
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="/assets/js/libs/jquery-3.1.1.min.js"></script>
+    <script src="/bootstrap/js/popper.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script>
+        $(document).ready(function() {
+            App.init();
+        });
+    </script>
+    
+
+    <script>
+        
+    </script>
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+    <script>
+        
+        function getHeight() {
+            var getMapElement = document.getElementById('basic_map1');
+            var getWindowHeight = window.innerHeight;
+            var setHeightOfMap = getMapElement.style.height = getWindowHeight + 'px';
+
+        }
+        getHeight();
+
+        window.addEventListener('resize', function(event){
+          getHeight();
+        })
+
+        let map, popup, Popup;
+        
+    
+
+        function initMap() {
+            
+            var markerSize = {
+    x: 22,
+    y: 40
+  };
+            google.maps.Marker.prototype.setLabel = function(label) {
+    this.label = new MarkerLabel({
+      map: this.map,
+      marker: this,
+      text: label
+    });
+    this.label.bindTo('position', this, 'position');
+  };
+
+  var MarkerLabel = function(options) {
+    this.setValues(options);
+    this.span = document.createElement('span');
+    this.span.className = 'map-marker-label';
+  };
+
+  MarkerLabel.prototype = $.extend(new google.maps.OverlayView(), {
+    onAdd: function() {
+      this.getPanes().overlayImage.appendChild(this.span);
+      var self = this;
+      this.listeners = [
+        google.maps.event.addListener(this, 'position_changed', function() {
+          self.draw();
+        })
+      ];
+    },
+    draw: function() {
+      var text = String(this.get('text'));
+      var position = this.getProjection().fromLatLngToDivPixel(this.get('position'));
+      this.span.innerHTML = text;
+      this.span.style.left = (position.x - (markerSize.x / 2)) - (text.length * 3) + 10 + 'px';
+      this.span.style.top = (position.y - markerSize.y + 40) + 'px';
+    }
+  });
+
+            console.log(arr2);
+            gmarkers = [];
+            map = new google.maps.Map(document.getElementById("basic_map1"), {
+                center: { lat: 30.3753, lng: 69.3451 },
+                zoom: 6,
+
+            });
+
+
+            const geocoder = new google.maps.Geocoder();
+            var infowindow = new google.maps.InfoWindow();
+            // const image = "/car_stopped.png";
+            const image = "/car_stopped.png";
+            const fimage = "/car_travelling.png";
+            
+
+            function createMarker(latlng, html, id1, carName,lat,lng,speed) {
+
+                const mark = (speed > 0) ? fimage : image;
+                  
+                   
+               
+                var marker = new google.maps.Marker({
+                    position: latlng,
+                    map: map,
+                    url: "/run/"+ carName,
+
+                   
+                    label: carName,
+                    
+                    
+                    
+                    icon: {
+                        labelOrigin: new google.maps.Point(11, 50),
+                        url: mark,
+                        //size: new google.maps.Size(22, 40),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(11, 40),
+                    },
+                   
+                    
+
+                });
+                console.log(lat,lng);
+                var address11, infowindowContent;
+                
+                $.get('https://maps.googleapis.com/maps/api/geocode/json?latlng='+ lat+','+lng+'&key=&sensor=false', function (data) {
+                // address11 = (data['results'][0]['formatted_address']);
+                
+                infowindowContent ='<div class="container" style="width: 100%; height: auto; "><div class="row"><div class="col-md-12"><p style="font-weight: bold; color:#000;text-align:center">'+carName+'</p><div class="row"><div class="col-md-12"><label for="" style="width: 33.33%; font-size: 12px; color:#000">Last Update:</label><span style="color: #000;">'+formatTime+'</span></div><div class="col-md-12"><label for=""style="width: 33.33%; font-size: 12px;  color:#000">Speed :</label><span style="color: #000;">'+speed+' km/h</span></div></div></div></div></div>';
+                });
+                //new google.maps.setCenter(latlng);
+                google.maps.event.addListener(marker, 'dblclick', function () {
+                    window.location.href = marker.url;
+                });
+                google.maps.event.addListener(marker, 'click', function () {
+
+                    infowindow.setContent(infowindowContent);
+                    infowindow.open(map, marker);
+                });
+                google.maps.event.addListener(marker, 'mouseover', function () {
+                    infowindow.setContent(infowindowContent);
+                    infowindow.open(map, marker);
+                });
+                google.maps.event.addListener(marker, 'mouseout', function () {
+                    infowindow.setContent(infowindowContent);
+                    infowindow.close();
+                });
+                return marker;
+            }
+            console.log(arr);
+            for (var i = 0; i < arr2.length; i++) {
+                gmarkers[arr2[i][0]] = createMarker(new google.maps.LatLng(arr2[i][1], arr2[i][2]), arr2[i][0], arr2[i][3], arr2[i][4],arr2[i][1],arr2[i][2],arr2[i][5]);
+            }
+            console.log(schools);
+            var infowindow1 = new google.maps.InfoWindow();
+    var locations_school = schools;
+     for (i = 0; i < schools.length; i++) { 
+        
+        const image = "/assets/school.png";
+        marker = new google.maps.Marker({        
+          position: new google.maps.LatLng(locations_school[i].lati, locations_school[i].lngi),
+          map: map,
+          icon: image,
+          
+        }); 
+        
+
+    }
+
+            
+
+
+        }
+    </script>
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <script src="/assets/js/custom.js"></script>
+    <script src="/assets/js/scrollspyNav.js"></script>
+
+     <!-- <script src="/plugins/flatpickr/custom-flatpickr.js"></script> -->
+
+    <script src="/plugins/noUiSlider/custom-nouiSlider.js"></script>
+    <script src="/plugins/bootstrap-range-Slider/bootstrap-rangeSlider.js"></script>
+    <script src="/plugins/highlight/highlight.pack.js"></script>
+
+    <script src="/assets/js/elements/custom-search.js"></script>
+    <script src="/assets/js/scrollspyNav.js"></script>
+    
+
+
+
+ <!-- <script>
+           var f3 = flatpickr(document.getElementById('rangeCalendarFlatpickr'), {
+    mode: "range"
+});
+ </script> -->
+
+ 
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+</body>
+
+<!-- Mirrored from designreset.com/cork/ltr/demo12/starter_kit_alt_menu.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 May 2021 05:27:13 GMT -->
+</html>

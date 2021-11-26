@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>TCF-Dashboard</title>
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico" />
+    <link href="/assets/css/loader.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/js/loader.js"></script>
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&amp;display=swap" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/structure.css" rel="stylesheet" type="text/css" class="structure" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <link href="/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/apex/apexcharts.css" rel="stylesheet" type="text/css">
+
+    <link href="/assets/css/dashboard/dash_1.css" rel="stylesheet" type="text/css" class="dashboard-analytics" />
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+    <link rel="stylesheet" type="text/css" href="/plugins/table/datatable/datatables.css">
+    <link rel="stylesheet" type="text/css" href="/plugins/table/datatable/custom_dt_miscellaneous.css">
+    <link rel="stylesheet" type="text/css" href="/assets/css/forms/theme-checkbox-radio.css">
+    <link rel="stylesheet" type="text/css" href="/plugins/table/datatable/dt-global_style.css">
+    <link rel="stylesheet" type="text/css" href="/plugins/bootstrap-select/bootstrap-select.min.css">
+
+</head>
+<style>
+    .widget-four .widget-content .browser-list:not(:last-child) {
+        margin-bottom: 18px !important
+    }
+    
+</style>
+
+<body class="dashboard-analytics admin-header">
+    <script>
+        var array1 = [];
+        var array1_v = [];
+        var array2 = [];
+        var by_make = [];
+        var avg_fuel = [];
+        var avg_fuel_label = [];
+        var avg_fuel_v = [];
+        var cap_util_label = [];
+        var by_make_label = [];
+        var cap_util = [];
+        var allocation = [];
+        var allocation_label = [];
+        var av_ = [];
+        var av_label = [];
+        var al_ = [];
+        var al_label = [];
+        var array2_label = [];
+    </script>
+    <!-- BEGIN LOADER -->
+    <div id="load_screen">
+        <div class="loader">
+            <div class="loader-content">
+                <div class="spinner-grow align-self-center"></div>
+            </div>
+        </div>
+    </div>
+    <!--  END LOADER -->
+
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
+
+        <!--  BEGIN SIDEBAR  -->
+        <%- include("sidebar"); %>
+            <!--  END SIDEBAR  -->
+
+            <!--  BEGIN CONTENT AREA  -->
+            <div id="content" class="main-content">
+                <div class="layout-px-spacing">
+
+                    <div class="content-container">
+
+                        <div class="col layout-top-spacing">
+                            <div class="col-content">
+
+                                <div class="header-container">
+                                    <header class="header navbar navbar-expand-sm">
+                                        <div class="d-flex">
+                                            <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom">
+                                                <div class="bt-menu-trigger">
+                                                    <span></span>
+                                                </div>
+                                            </a>
+                                            <div class="page-header">
+                                                <div class="page-title">
+                                                    <select class="selectpicker" data-live-search="true" id="selectBox1" onchange="vehi_search()">
+                                                        <option>Search Reg Number</option>
+                                                        <% for (const i in data13) {
+                                                            %>
+                                                            <option value="<%= data13[i].id%>"><%= data13[i].reg_number%></option>
+                                                            <%
+                                                          }
+                                                          %>
+                                                        
+                                                    </select>
+                                                    <script>
+                                                        function vehi_search() {
+                                                            var selectBox = document.getElementById("selectBox1");
+                                                            var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+                                                            // alert(selectedValue);
+                                                            window.location.href = '/updateVehicle/'+ selectedValue;
+                                                        }
+                                                    </script>
+                                                </div>
+                                               
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="" style="display: flex;justify-content: center;">
+
+                                            <h3 class="font-weight-bold">
+                                                <% if (name_area.length> 0) { %>
+                                                    <span>
+                                                        <%= name_area %>
+                                                    </span>
+                                                    <% } %>
+                                            </h3>
+                                        </div>
+
+                                        <div class="header-actions">
+                                            <div class="nav-item dropdown language-dropdown more-dropdown">
+                                                <%- include("logout") %>
+                                            </div>
+
+                                            <div class="toggle-notification-bar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                                                    viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                                                    class="feather feather-bell">
+                                                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+                                                    <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </header>
+                                </div>
+
+                                <div class="admin-data-content layout-top-spacing">
+
+                                    <div class="row">
+
+                                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+                                            <div class="widget widget-one">
+                                                <div class="widget-heading">
+                                                    <h6 class="">Fleet</h6>
+                                                </div>
+                                                <div class="w-chart">
+
+                                                    <div class="w-chart-section total-visits-content">
+                                                        <div class="w-detail">
+                                                            <p class="w-title">Total Fleet </p>
+                                                            <% if(data1.length!=0){ var i=1; var j=1;
+                                                                data1.forEach(function(data) { %>
+                                                                <p class="w-stats">
+                                                                    <%= data.total_vehicle %>
+                                                                </p>
+                                                                <% }) %>
+                                                                    <% } %>
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <div class="w-chart-section paid-visits-content">
+                                                        <div class="w-detail">
+                                                            <p class="w-title">Total Bolans</p>
+                                                            <% if(data2.length!=0){ var i=1; var j=1;
+                                                                data2.forEach(function(data) { %>
+                                                                <p class="w-stats">
+                                                                    <%= data.total_bolan %>
+                                                                </p>
+                                                                <% }) %>
+                                                                    <% } %>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+                                            <div class="widget widget-one">
+                                                <div class="widget-heading">
+                                                    <h6 class="">Pick & Drop</h6>
+                                                </div>
+                                                <div class="w-chart">
+
+                                                    <div class="w-chart-section total-visits-content">
+                                                        <div class="w-detail">
+                                                            <p class="w-title">Pick & Drop</p>
+                                                            <% if(data3.length!=0){ var i=1; var j=1;
+                                                                data3.forEach(function(data) { %>
+                                                                <p class="w-stats">
+                                                                    <%= data.pick %>
+                                                                </p>
+                                                                <% }) %>
+                                                                    <% } %>
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <div class="w-chart-section paid-visits-content">
+                                                        <div class="w-detail">
+                                                            <p class="w-title">Panoramas </p>
+                                                            <% if(data4.length!=0){ var i=1; var j=1;
+                                                                data4.forEach(function(data) { %>
+                                                                <p class="w-stats">
+                                                                    <%= data.pana %>
+                                                                </p>
+                                                                <% }) %>
+                                                                    <% } %>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+                                            <div class="widget widget-one">
+                                                <div class="widget-heading">
+                                                    <h6 class="">Shift Vehicles</h6>
+                                                </div>
+                                                <div class="w-chart">
+
+                                                    <div class="w-chart-section total-visits-content">
+                                                        <div class="w-detail">
+                                                            <p class="w-title">Single Shift</p>
+                                                            <% if(data17.length!=0){ var i=1; var j=1;
+                                                                data17.forEach(function(data) { %>
+                                                                <p class="w-stats">
+                                                                    <%= data.count %>
+                                                                </p>
+                                                                <% }) %>
+                                                                    <% } %>
+                                                        </div>
+
+                                                    </div>
+
+
+                                                    <div class="w-chart-section paid-visits-content">
+                                                        <div class="w-detail">
+                                                            <p class="w-title">Double Shift</p>
+                                                            <% if(data16.length!=0){ var i=1; var j=1;
+                                                                data16.forEach(function(data) { %>
+                                                                <p class="w-stats">
+                                                                    <%= data.count %>
+                                                                </p>
+                                                                <% }) %>
+                                                                    <% } %>
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 col-12 layout-spacing">
+                                            <div class="widget widget-one">
+                                                <div class="widget-heading">
+                                                    <h6 class="">Staff</h6>
+                                                </div>
+                                                <div class="w-chart">
+
+                                                    <div class="w-chart-section total-visits-content">
+                                                        <div class="w-detail">
+                                                            <p class="w-title">Staff Vehicles</p>
+                                                            <% if(staff.length!=0){ var i=1; var j=1;
+                                                                staff.forEach(function(data) { %>
+                                                                <p class="w-stats">
+                                                                    <%= data.suma %>
+                                                                </p>
+                                                                <% }) %>
+                                                                    <% } %>
+                                                        </div>
+
+                                                    </div>
+
+
+
+
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 layout-spacing">
+                                            <div class="widget widget-chart-three">
+                                                <div class="widget-heading">
+                                                    <div class="">
+                                                        <h5 class="">Average Fuel Consumption (Km/Ltr) GPS</h5>
+                                                    </div>
+                                                    <% if(data5.length!=0){ var i=1; var j=1;
+                                                        data5.forEach(function(data) { %>
+                                                        <script>
+                                                            var a = "<%= data.average %>";
+                                                            var b = "<%= data.vehicles %>";
+                                                            
+                                                            var one = parseInt(a);
+                                                            var two1 = parseInt(b);
+                                                            array1.push(one);
+                                                            array1_v.push(two1);
+
+                                                        </script>
+                                                        <% }) %>
+                                                            <% } %>
+                                                                <% if(data10.length!=0){ var i=1; var j=1;
+                                                                    data10.forEach(function(data) { %>
+                                                                    <script>
+                                                                        var a1 = "<%= data.avg1 %>";
+                                                                        var one1 = parseInt(a1);
+                                                                        var b = "<%= data.vehicles %>";
+                                                                        var two = parseInt(b);
+                                                                        var c = "<%= data.month1 %>";
+                                                                        
+                                                                        avg_fuel.push(one1);
+                                                                        avg_fuel_v.push(two);
+                                                                        avg_fuel_label.push(c);
+                                                                    </script>
+                                                                    <% }) %>
+                                                                        <% } %>
+                                                                        <% if(data18.length!=0){ var i=1; var j=1;
+                                                                            data18.forEach(function(data) { %>
+                                                                            <script>
+                                                                                var a1 = "<%= data.count %>";
+                                                                                var one1 = parseInt(a1);
+                                                                                al_.push(one1);
+                                                                                var a2 = "<%= data.region_name %>";
+                                                                                
+                                                                                al_label.push(a2);
+                                                                            </script>
+                                                                            <% }) %>
+                                                                                <% } %>
+                                                                            <% if(data11.length!=0){ var i=1; var j=1;
+                                                                                data11.forEach(function(data) { %>
+                                                                                <script>
+                                                                                    var a1 = "<%= data.vehicles %>";
+                                                                                    var one1 = parseInt(a1);
+                                                                                    cap_util.push(one1);
+                                                                                    var a2 = "<%= data.util %>";
+
+                                                                                    cap_util_label.push(a2);
+                                                                                </script>
+                                                                                <% }) %>
+                                                                                    <% } %>
+                                                                                        <% if(data12.length!=0){ var
+                                                                                            i=1; var j=1;
+                                                                                            data12.forEach(function(data)
+                                                                                            { %>
+                                                                                            <script>
+                                                                                                var s = "<%= data.tt %>";
+                                                                                                var t = parseInt(s);
+                                                                                                by_make.push(t);
+                                                                                                var s1 = "<%= data.make %>";
+
+                                                                                                by_make_label.push(s1);
+                                                                                            </script>
+                                                                                            <% }) %>
+                                                                                                <% } %>
+                                                                                                    <% if(data14.length!=0){
+                                                                                                        var i=1; var
+                                                                                                        j=1;
+                                                                                                        data14.forEach(function(data)
+                                                                                                        { %>
+                                                                                                        <script>
+                                                                                                            var s1 = "<%= data.vehicles %>";
+                                                                                                            var t1 = parseInt(s1);
+                                                                                                            allocation.push(t1);
+                                                                                                            var s3 = "<%= data.type_name %>";
+
+                                                                                                            allocation_label.push(s3);
+                                                                                                        </script>
+                                                                                                        <% }) %>
+                                                                                                            <% } %>
+                                                                                                                <% if(data15.length!=0){
+                                                                                                                    var
+                                                                                                                    i=1;
+                                                                                                                    var
+                                                                                                                    j=1;
+                                                                                                                    data15.forEach(function(data)
+                                                                                                                    { %>
+                                                                                                                    <script>
+                                                                                                                        var s11 = "<%= data.avg %>";
+                                                                                                                        var t11 = parseInt(s11);
+                                                                                                                        av_.push(t11);
+                                                                                                                        var s31 = "<%= data.region_name %>";
+                                                                                                                        av_label.push(s31);
+
+                                                                                                                    </script>
+                                                                                                                    <% })
+                                                                                                                        %>
+                                                                                                                        <% }
+                                                                                                                            %>
+                                                                                                                            <div
+                                                                                                                                class="dropdown ">
+                                                                                                                                <a class="dropdown-toggle"
+                                                                                                                                    href="#"
+                                                                                                                                    role="button"
+                                                                                                                                    id="uniqueVisitors"
+                                                                                                                                    data-toggle="dropdown"
+                                                                                                                                    aria-haspopup="true"
+                                                                                                                                    aria-expanded="false">
+                                                                                                                                    <svg xmlns="http://www.w3.org/2000/svg"
+                                                                                                                                        width="24"
+                                                                                                                                        height="24"
+                                                                                                                                        viewBox="0 0 24 24"
+                                                                                                                                        fill="none"
+                                                                                                                                        stroke="currentColor"
+                                                                                                                                        stroke-width="2"
+                                                                                                                                        stroke-linecap="round"
+                                                                                                                                        stroke-linejoin="round"
+                                                                                                                                        class="feather feather-more-horizontal">
+                                                                                                                                        <circle
+                                                                                                                                            cx="12"
+                                                                                                                                            cy="12"
+                                                                                                                                            r="1">
+                                                                                                                                        </circle>
+                                                                                                                                        <circle
+                                                                                                                                            cx="19"
+                                                                                                                                            cy="12"
+                                                                                                                                            r="1">
+                                                                                                                                        </circle>
+                                                                                                                                        <circle
+                                                                                                                                            cx="5"
+                                                                                                                                            cy="12"
+                                                                                                                                            r="1">
+                                                                                                                                        </circle>
+                                                                                                                                    </svg>
+                                                                                                                                </a>
+
+                                                                                                                                <div class="dropdown-menu dropdown-menu-right"
+                                                                                                                                    aria-labelledby="uniqueVisitors">
+                                                                                                                                    <a class="dropdown-item"
+                                                                                                                                        href="javascript:void(0);">View</a>
+                                                                                                                                    <a class="dropdown-item"
+                                                                                                                                        href="javascript:void(0);">Update</a>
+                                                                                                                                    <a class="dropdown-item"
+                                                                                                                                        href="javascript:void(0);">Download</a>
+                                                                                                                                </div>
+                                                                                                                            </div>
+                                                </div>
+
+                                                <div class="widget-content">
+
+                                                    <div id="uniqueVisits2"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <div class="row widget-statistic">
+                                                <div
+                                                    class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12 layout-spacing">
+                                                    <div class="widget widget-one_hybrid widget-followers" style="height: 350px !important;">
+                                                        <div class="widget-heading">
+                                                            <div class="w-title">
+                                                                <div class="w-icon">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-users">
+                                                                        <path
+                                                                            d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2">
+                                                                        </path>
+                                                                        <circle cx="9" cy="7" r="4"></circle>
+                                                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                                                    </svg>
+                                                                </div>
+                                                                <div class="">
+                                                                    <p class="w-value">Capacity Utilization</p>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="widget-content">
+                                                            <div class="w-chart">
+                                                                <div id="samad"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12 layout-spacing">
+                                                    <div class="widget-four">
+                                                        <h5 class="">Faculty Using Transport</h5>
+                                                        <div class="widget-content">
+                                                            <div class="vistorsBrowser">
+                                                                <div class="browser-list">
+                                                                    <div class="w-icon">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                            width="24" height="24" viewBox="0 0 24 24"
+                                                                            fill="none" stroke="currentColor"
+                                                                            stroke-width="2" stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            class="feather feather-chrome">
+                                                                            <circle cx="12" cy="12" r="10"></circle>
+                                                                            <circle cx="12" cy="12" r="4"></circle>
+                                                                            <line x1="21.17" y1="8" x2="12" y2="8">
+                                                                            </line>
+                                                                            <line x1="3.95" y1="6.06" x2="8.54" y2="14">
+                                                                            </line>
+                                                                            <line x1="10.88" y1="21.94" x2="15.46"
+                                                                                y2="14"></line>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <div class="w-browser-details">
+                                                                        <div class="w-browser-info">
+                                                                            <h6>Total Faculty</h6>
+                                                                            <% if(data8.length!=0){ var i=1; var j=1;
+                                                                                data8.forEach(function(data) { %>
+                                                                                <p class="browser-count">
+                                                                                    <%= data.total_faculty%>
+                                                                                </p>
+                                                                        </div>
+                                                                        <div class="w-browser-stats">
+                                                                            <div class="progress">
+                                                                                <div class="progress-bar bg-gradient-primary"
+                                                                                    role="progressbar"
+                                                                                    style="width: <%= data.total_faculty%>%"
+                                                                                    aria-valuenow="90" aria-valuemin="0"
+                                                                                    aria-valuemax="100"></div>
+                                                                            </div>
+                                                                            <script>
+                                                                                var tot_fac = "<%= data.total_faculty%>";
+                                                                                //alert(tot_fac)
+                                                                            </script>
+                                                                            <% }) %>
+                                                                                <% } %>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="browser-list">
+                                                                    <div class="w-icon">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                            width="24" height="24" viewBox="0 0 24 24"
+                                                                            fill="none" stroke="currentColor"
+                                                                            stroke-width="2" stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            class="feather feather-chrome">
+                                                                            <circle cx="12" cy="12" r="10"></circle>
+                                                                            <circle cx="12" cy="12" r="4"></circle>
+                                                                            <line x1="21.17" y1="8" x2="12" y2="8">
+                                                                            </line>
+                                                                            <line x1="3.95" y1="6.06" x2="8.54" y2="14">
+                                                                            </line>
+                                                                            <line x1="10.88" y1="21.94" x2="15.46"
+                                                                                y2="14"></line>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <div class="w-browser-details">
+                                                                        <div class="w-browser-info">
+                                                                            <h6>Total User</h6>
+                                                                            <% if(total_users.length!=0){ var i=1; var j=1;
+                                                                                total_users.forEach(function(data) { %>
+                                                                                <p class="browser-count">
+                                                                                    <%= data.total_users %>
+                                                                                </p>
+                                                                                <script>
+                                                                                    var tot_users = "<%= data.total_users %>";
+                                                                                    //alert(tot_users)
+                                                                                    var locals = 100-tot_users/tot_fac*100
+                                                                                    // alert(Math.round(locals))
+                                                                                </script>
+                                                                        </div>
+                                                                        <div class="w-browser-stats">
+                                                                            <div class="progress">
+                                                                                <div class="progress-bar bg-gradient-primary"
+                                                                                    role="progressbar"
+                                                                                    style="width: <%= data.total_users%>%"
+                                                                                    aria-valuenow="90" aria-valuemin="0"
+                                                                                    aria-valuemax="100"></div>
+                                                                            </div>
+                                                                            <script>
+                                                                                var a = "<%= data.t_vehicle%>";
+                                                                                var a_int = parseInt(a);
+                                                                                var num = parseInt("<%= data.total_users%>");
+                                                                            </script>
+                                                                            <% }) %>
+                                                                                <% } %>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+
+                                                                <div class="browser-list">
+                                                                    <div class="w-icon">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                            width="24" height="24" viewBox="0 0 24 24"
+                                                                            fill="none" stroke="currentColor"
+                                                                            stroke-width="2" stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            class="feather feather-compass">
+                                                                            <circle cx="12" cy="12" r="10"></circle>
+                                                                            <polygon
+                                                                                points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76">
+                                                                            </polygon>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <div class="w-browser-details">
+
+                                                                        <div class="w-browser-info">
+                                                                            <h6>User Tagged</h6>
+                                                                            <% if(emp_tagged.length!=0){ var i=1; var j=1;
+                                                                                emp_tagged.forEach(function(data) { %>
+                                                                                <p class="browser-count">
+                                                                                    <%= data.emp_tagged %>
+                                                                                </p>
+                                                                        </div>
+
+                                                                        <div class="w-browser-stats">
+                                                                            <div class="progress">
+                                                                                <div class="progress-bar bg-gradient-danger"
+                                                                                    role="progressbar"
+                                                                                    aria-valuenow="65" aria-valuemin="0"
+                                                                                    id="tagged" aria-valuemax="100">
+                                                                                </div>
+                                                                            </div>
+                                                                            <script>
+                                                                                var num2 = parseInt("<%= data.emp_tagged %>")
+                                                                                var ss = percentage(num2, num);
+                                                                                console.log(ss + "percentage")
+                                                                                document.getElementById('tagged').style.width = ss + "%";
+                                                                                function percentage(num, per) {
+                                                                                    return (num / per) * 100;
+                                                                                }
+
+                                                                            </script>
+                                                                            <% }) %>
+                                                                                <% } %>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                                <div class="browser-list">
+                                                                    <div class="w-icon">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                            width="24" height="24" viewBox="0 0 24 24"
+                                                                            fill="none" stroke="currentColor"
+                                                                            stroke-width="2" stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            class="feather feather-globe">
+                                                                            <circle cx="12" cy="12" r="10"></circle>
+                                                                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                                                                            <path
+                                                                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                                                            </path>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <div class="w-browser-details">
+
+                                                                        <div class="w-browser-info">
+                                                                            <h6>User Not Tagged</h6>
+
+                                                                            <% if(emp_n_tagged.length!=0){ var i=1; var j=1;
+                                                                                emp_n_tagged.forEach(function(data) { %>
+                                                                                <p class="browser-count">
+                                                                                    <%= data.emp_n_tagged %>
+                                                                                </p>
+                                                                        </div>
+
+                                                                        <div class="w-browser-stats">
+                                                                            <div class="progress">
+                                                                                <div class="progress-bar bg-gradient-danger"
+                                                                                    role="progressbar" id="ntagged"
+                                                                                    aria-valuenow="65" aria-valuemin="0"
+                                                                                    aria-valuemax="100"></div>
+                                                                            </div>
+                                                                            <script>
+
+                                                                                var num3 = "<%= data.emp_n_tagged%>"
+                                                                                /// document.getElementById('un').innerHTML = final;
+                                                                                var ss = percentage(num3, num2);
+                                                                                console.log(ss + "percentage")
+                                                                                document.getElementById('ntagged').style.width = ss + "%";
+
+                                                                                function percentage(num, per) {
+                                                                                    return (num / per) * 100;
+                                                                                }
+
+                                                                            </script>
+                                                                            <% }) %>
+                                                                                <% } %>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+                                                                <div class="browser-list">
+                                                                    <div class="w-icon">
+                                                                        <svg xmlns="http://www.w3.org/2000/svg"
+                                                                            width="24" height="24" viewBox="0 0 24 24"
+                                                                            fill="none" stroke="currentColor"
+                                                                            stroke-width="2" stroke-linecap="round"
+                                                                            stroke-linejoin="round"
+                                                                            class="feather feather-globe">
+                                                                            <circle cx="12" cy="12" r="10"></circle>
+                                                                            <line x1="2" y1="12" x2="22" y2="12"></line>
+                                                                            <path
+                                                                                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                                                                            </path>
+                                                                        </svg>
+                                                                    </div>
+                                                                    <div class="w-browser-details">
+
+                                                                        <div class="w-browser-info">
+                                                                            <h6>Localization</h6>
+
+                                                                            <% if(data8.length!=0){ var i=1; var j=1;
+                                                                                data8.forEach(function(data) { %>
+                                                                                <p class="browser-count" id="local">
+                                                                                </p>
+                                                                                <script>
+                                                                                    document.getElementById("local").innerHTML =Math.round(locals)+"%"
+                                                                                </script>
+                                                                        </div>
+
+                                                                        <div class="w-browser-stats">
+                                                                            <div class="progress">
+                                                                                <div class="progress-bar bg-gradient-success"
+                                                                                    role="progressbar" id="localss"
+                                                                                   
+                                                                                    aria-valuenow="65" aria-valuemin="0"
+                                                                                    aria-valuemax="100"></div>
+                                                                            </div>
+                                                                            <script>
+
+                                                                                document.getElementById("localss").style.width = Math.round(locals)+"%"
+
+                                                                            </script>
+                                                                            <% }) %>
+                                                                                <% } %>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+
+
+
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="col-xl-4 col-lg-6 col-md-12 col-sm-12 col-12 layout-spacing">
+                                                    <div class="widget widget-one_hybrid widget-engagement " style="height: 350px !important;">
+                                                        <div class="widget-heading">
+                                                            <div class="w-title">
+                                                                <div class="w-icon">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-message-circle">
+                                                                        <path
+                                                                            d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                                                                        </path>
+                                                                    </svg>
+                                                                </div>
+                                                                <div class="">
+                                                                    <p class="w-value">Fuel Cards</p>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="widget-content">
+                                                            <div class="w-chart">
+                                                                <% if(data9.length!=0){ var i=1; var j=1;
+                                                                    data9.forEach(function(data) { %>
+                                                                    <script>
+                                                                        var a = "<%= data.total %>";
+                                                                        var b = "<%= data.company_name %>";
+                                                                        var one = parseInt(a);
+                                                                        array2.push(one);
+                                                                        array2_label.push(b);
+
+                                                                    </script>
+                                                                    <% }) %>
+                                                                        <% } %>
+                                                                        <script>
+                                                                            array2.push(421)
+                                                                            array2_label.push("Cash");
+                                                                        </script>
+                                                                            <div id="fuel_graph"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="chartLine" class="col-xl-12 layout-top-spacing layout-spacing">
+                                            <div class="statbox widget box box-shadow">
+                                                <div class="widget-header">
+                                                    <div class="row">
+                                                        <div class="col-xl-12 col-md-12 col-sm-12 col-12">
+                                                            <h4>Average Fuel Cost/Month</h4>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="widget-content widget-content-area">
+                                                    <div id="s-line" class=""></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <div class="row widget-statistic">
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
+                                                    <div class="widget widget-one_hybrid widget-followers">
+                                                        <div class="widget-heading">
+                                                            <div class="w-title">
+                                                                <div class="w-icon">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-users">
+                                                                        <path
+                                                                            d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2">
+                                                                        </path>
+                                                                        <circle cx="9" cy="7" r="4"></circle>
+                                                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                                                    </svg>
+                                                                </div>
+                                                                <div class="">
+                                                                    <p class="w-value">Allocation</p>
+                                                                    <h5 class="">(Region/Area)</h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="widget-content">
+                                                            <div class="w-chart">
+                                                                <div id="avg"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
+                                                    <div class="widget widget-one_hybrid widget-referral">
+                                                        <div class="widget-heading">
+                                                            <div class="w-title">
+                                                                <div class="w-icon">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-link">
+                                                                        <path
+                                                                            d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71">
+                                                                        </path>
+                                                                    </svg>
+                                                                </div>
+                                                                <div class="">
+                                                                    <p class="w-value">Allocation</p>
+                                                                    <h5 class="">Functionality</h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="widget-content">
+                                                            <div class="w-chart">
+                                                                <div id="allocation"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <div class="row widget-statistic">
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
+                                                    <div class="widget widget-one_hybrid widget-followers">
+                                                        <div class="widget-heading">
+                                                            <div class="w-title">
+                                                                <div class="w-icon">
+                                                                    <svg xmlns="http://www.w3.orgy2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-users">
+                                                                        <path
+                                                                            d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2">
+                                                                        </path>
+                                                                        <circle cx="9" cy="7" r="4"></circle>
+                                                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                                                    </svg>
+                                                                </div>
+                                                                <div class="">
+                                                                    <p class="w-value">Vehicles By Make</p>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="widget-content">
+                                                            <div class="w-chart">
+                                                                <div id="samad21"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
+                                                    <div class="widget widget-one_hybrid widget-referral">
+                                                        <div class="widget-heading">
+                                                            <div class="w-title">
+                                                                <div class="w-icon">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-link">
+                                                                        <path
+                                                                            d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71">
+                                                                        </path>
+                                                                    </svg>
+                                                                </div>
+                                                                <div class="">
+                                                                    <p class="w-value">Capacity Utilization
+                                                                    </p>
+                                                                    <h5 class="">(No. of Faculty in a Van)</h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="widget-content">
+                                                            <div class="w-chart">
+                                                                <div id="samad3"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                            <div class="row widget-statistic">
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
+                                                    <div class="widget widget-one_hybrid widget-followers">
+                                                        <div class="widget-heading">
+                                                            <div class="w-title">
+                                                                <div class="w-icon">
+                                                                    <svg xmlns="http://www.w3.orgy2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-users">
+                                                                        <path
+                                                                            d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2">
+                                                                        </path>
+                                                                        <circle cx="9" cy="7" r="4"></circle>
+                                                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                                                    </svg>
+                                                                </div>
+                                                                <div class="">
+                                                                    <p class="w-value">AVU History</p>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="widget-content">
+                                                            <div class="w-chart">
+                                                                <div id="samad22"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12 layout-spacing">
+                                                    <div class="widget widget-one_hybrid widget-referral">
+                                                        <div class="widget-heading">
+                                                            <div class="w-title">
+                                                                <div class="w-icon">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                                                        height="24" viewBox="0 0 24 24" fill="none"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round" stroke-linejoin="round"
+                                                                        class="feather feather-link">
+                                                                        <path
+                                                                            d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71">
+                                                                        </path>
+                                                                        <path
+                                                                            d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71">
+                                                                        </path>
+                                                                    </svg>
+                                                                </div>
+                                                                <div class="">
+                                                                    <p class="w-value">Average Vehicle Utilization
+                                                                    </p>
+                                                                    <h5 class="">(AVU)</h5>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="widget-content">
+                                                            <div class="w-chart">
+                                                                <div id="samad123"></div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <div class="col-lg-12">
+                                                <div class="statbox widget box box-shadow">
+                                                    <div class="widget-content widget-content-area">
+                                                        <table id="example" class="table table-hover">
+                                                            <thead>
+                                                                <tr role="row">
+                                                                    <th>Region</th>
+                                                                    <th>Area</th>
+                                                                    
+                                                                    <th> Registeration Number </th>
+                                                                    <th> Capacity </th>
+                                                                    <th>Make </th>
+                                                                    <th>Model</th>
+                                                                    <th>Engine No.</th>
+                                                                    <th>Chasis No.</th>
+                                                                    <th>Capacity Utilization Morning</th>
+                                                                    <th>Capacity Utilization Afternoon</th>
+                                                                    <th>Purchase Date</th>
+                                                                    <th>Registeration Date</th>
+                                                                    <th>Registeration State</th>
+                                                                    <th>Last Reporting</th>
+
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <% if(data13.length!=0){ var i=1; var j=1;
+                                                                    data13.forEach(function(data) { %>
+                                                                    <tr>
+                                                                        <td onclick='regions("<%=data.regionID %>");'
+                                                                            style="cursor: pointer;">
+
+                                                                            <%= data.region_name %>
+                                                                        </td>
+                                                                        <script>
+                                                                            function regions(region_id) {
+                                                                                location.href = "dash2?id=" + region_id + "";
+                                                                            }
+
+                                                                        </script>
+                                                                        <td onclick='areas("<%=data.areaID %>");'
+                                                                            style="cursor: pointer;">
+
+                                                                            <%= data.area_name %>
+                                                                        </td>
+                                                                        <script>
+                                                                            function areas(area_id) {
+                                                                                location.href = "dash3?id=" + area_id + "";
+                                                                            }
+
+                                                                        </script>
+                                                                        
+                                                                        <td onclick='carBum("<%=data.id %>");'
+                                                                            style="cursor: pointer;">
+
+                                                                            <%=data.reg_number %>
+
+                                                                        </td>
+                                                                        <script>
+                                                                            function carBum(car_id) {
+                                                                                location.href = "updateVehicle/" + car_id + "";
+                                                                            }
+
+                                                                        </script>
+                                                                        <td>
+                                                                            <%=data.capacity %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%=data.make %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%=data.model %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%=data.engine_no %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%=data.chasis_no %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%=data.utilization_mor %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%=data.utilization_aft %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= moment(data.dop).format( 'DD-MMM-YYYY' ) %>
+
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= moment(data.dor).format( 'DD-MMM-YYYY' )
+                                                                                %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%=data.state_name %>
+                                                                        </td>
+                                                                        <td>
+                                                                            <%= moment(data.last_update_on).format( 'DD-MMM-YYYY   HH:mm:ss') %>
+                                                                        </td>
+
+
+                                                                    </tr>
+
+                                                                    <% }) %>
+                                                                        <% } %>
+                                                            </tbody>
+                                                            <tfoot>
+                                                                <tr role="row">
+                                                                    <th>Region</th>
+                                                                    <th>Area</th>
+                                                                    
+                                                                    <th> Registeration Number </th>
+                                                                    <th> Capacity </th>
+                                                                    <th>Make </th>
+                                                                    <th>Model</th>
+                                                                    <th>Engine No.</th>
+                                                                    <th>Chasis No.</th>
+                                                                    <th>Capacity Utilization Morning</th>
+                                                                    <th>Capacity Utilization Afternoon</th>
+                                                                    <th>Purchase Date</th>
+                                                                    <th>Registeration Date</th>
+                                                                    <th>Registeration State</th>
+                                                                    <th>Last Reporting</th>
+
+
+                                                                </tr>
+                                                            </tfoot>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+            <!--  END CONTENT AREA  -->
+    </div>
+    <!-- END MAIN CONTAINER -->
+
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="/assets/js/libs/jquery-3.1.1.min.js"></script>
+    <script src="/bootstrap/js/popper.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/app.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            App.init();
+
+        });
+
+
+
+
+
+
+    </script>
+    <script src="/assets/js/custom.js"></script>
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <script src="/assets/js/scrollspyNav.js"></script>
+    <script src="/plugins/apex/apexcharts.min.js"></script>
+    <!-- <script src="/plugins/apex/custom-apexcharts.js"></script> -->
+
+    <script src="/assets/js/dashboard/dash_1.js"></script>
+    <script src="/plugins/table/datatable/datatables.js"></script>
+    <script src="/plugins/table/datatable/button-ext/dataTables.buttons.min.js"></script>
+    <!-- <script src="/plugins/table/datatable/custom_miscellaneous.js"></script> -->
+<script src="/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+
+    <script>
+        var optionssss = {
+  chart: {
+    height: 350,
+    type: 'area',
+    toolbar: {
+      show: false,
+    }
+  },
+  
+  plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '55%',
+                    endingShape: 'rounded'
+                },
+            },
+            dataLabels: {
+                enabled: false
+            },
+            legend: {
+                position: 'bottom',
+                horizontalAlign: 'center',
+                fontSize: '14px',
+                markers: {
+                    width: 10,
+                    height: 10,
+                },
+                itemMargin: {
+                    horizontal: 0,
+                    vertical: 8
+                }
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            
+  series: [{
+    name: 'AVG Fuel Cost',
+    type: 'area',
+    data: avg_fuel,
+    grid: {
+                row: {
+                    colors: ['#f1f2f3', 'transparent'], // takes an array which will be repeated on columns
+                    opacity: 0.5
+                },
+            },
+  },
+   {
+    name: 'AVG Vehicles',
+    type: 'line',
+    data: avg_fuel_v
+  }],
+  stroke: {
+    width: [0, 4]
+  },
+  title: {
+    text: 'months'
+  },
+  labels: avg_fuel_label,
+  yaxis: [{
+    title: {
+      text: 'AVG Fuel Cost',
+    },
+
+  }, {
+    opposite: true,
+    title: {
+      text: 'AVG Vehicles'
+    }
+  }]
+
+}
+
+
+        var chart = new ApexCharts(
+            document.querySelector("#s-line"),
+            optionssss
+        );
+
+        chart.render();
+
+        var d_1options3 = {
+            chart: {
+                id: 'sparkline1',
+                type: 'bar',
+                height: 350,
+                sparkline: {
+                    enabled: false
+                },
+                toolbar: {
+                    show: false,
+                }
+            },
+            stroke: {
+                curve: 'smooth',
+                width: 2,
+            },
+            series: [{
+                name: 'Vehicles',
+                data: allocation
+            }],
+            labels: allocation_label,
+            yaxis: {
+                min: 0
+            },
+            colors: ['#FFE57B'],
+            tooltip: {
+                x: {
+                    show: true,
+                }
+            },
+        }
+        var chart = new ApexCharts(
+            document.querySelector("#allocation"),
+            d_1options3
+        );
+        chart.render();
+
+
+        var d_1options4 = {
+            chart: {
+                id: 'sparkline1',
+                type: 'bar',
+                height: 350,
+                sparkline: {
+                    enabled: false
+                },
+                toolbar: {
+                    show: false,
+                }
+            },
+            stroke: {
+                curve: 'smooth',
+                width: 2,
+            },
+            series: [{
+                name: 'vehicles',
+                data: al_
+            }],
+            dataLabels: {
+                enabled: true
+            },
+            labels: al_label,
+
+            colors: ['#32a58b'],
+            tooltip: {
+                x: {
+                    show: true,
+                }
+            },
+        }
+        var chart = new ApexCharts(
+            document.querySelector("#avg"),
+            d_1options4
+        );
+        var d_1options4 = {
+            chart: {
+                id: 'sparkline1',
+                type: 'bar',
+                height: 350,
+                sparkline: {
+                    enabled: false
+                },
+                toolbar: {
+                    show: false,
+                }
+            },
+            stroke: {
+                curve: 'smooth',
+                width: 2,
+            },
+            series: [{
+                name: 'Average Vehicle Utilization',
+                data: av_
+            }],
+            dataLabels: {
+                enabled: false
+            },
+            labels: av_label,
+
+            colors: ['#32a58b'],
+            tooltip: {
+                x: {
+                    show: true,
+                }
+            },
+        }
+        chart.render();
+        var chart2 = new ApexCharts(
+            document.querySelector("#samad123"),
+            d_1options4
+        );
+        chart2.render();
+
+        var options5 = {
+            chart: {
+                height: 180,
+                type: 'donut',
+                options: {
+                elements: {
+                    point:{
+                        radius: 0
+                    }
+                }
+            },
+                toolbar: {
+                    show: false,
+                }
+            },
+            series: [1882, 646, 882],
+            colors: ['#32a58b', '#32a555', '#f9f53d'],
+            labels: ['Morning Faculty', 'Afternoon Faculty', 'Empty Space'],
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'right'
+                    }
+                }
+            }]
+        }
+        var chart2 = new ApexCharts(
+            document.querySelector("#samad"),
+            options5
+        );
+        chart2.render();
+
+        var options6 = {
+            chart: {
+                type: 'bar',
+                height: 160,
+                sparkline: {
+                    enabled: true
+                },
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: true,
+                }
+            },
+            stroke: {
+                curve: 'smooth',
+                width: 2,
+            },
+            fill: {
+                opacity: 1,
+            },
+            series: [{
+                name: 'Samad',
+                data: [78, 50, 36, 60, 38, 52, 38]
+            }],
+            labels: ['1', '2', '3', '4', '5', '6', '7'],
+            yaxis: {
+                min: 0
+            },
+            colors: ['#32a58b'],
+            tooltip: {
+                x: {
+                    show: false,
+                }
+            }
+        }
+
+        var chart2 = new ApexCharts(
+            document.querySelector("#samad2"),
+            options6
+        );
+
+
+
+        var donutChart = {
+            chart: {
+                height: 180,
+                type: 'donut',
+                toolbar: {
+                    show: false,
+                }
+            },
+            series: array2,
+            labels: array2_label,
+            colors: ['#6495ED', '#008B8B'],
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        }
+
+        var donut = new ApexCharts(
+            document.querySelector("#fuel_graph"),
+            donutChart
+        );
+
+        donut.render();
+
+        var options7 = {
+            chart: {
+                type: 'bar',
+                height: 350,
+                sparkline: {
+                    enabled: false
+                },
+                toolbar: {
+                    show: false,
+                }
+            },
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                }
+            },
+            stroke: {
+                curve: 'smooth',
+                width: 2,
+            },
+            fill: {
+                opacity: 1,
+            },
+            series: [{
+                name: 'Total Vehicles',
+                data: by_make
+            }],
+            labels: by_make_label,
+            yaxis: {
+                min: 0
+            },
+
+            colors: ['#32a58b'],
+            tooltip: {
+                x: {
+                    show: true,
+                }
+            }
+        }
+
+        var chart2 = new ApexCharts(
+            document.querySelector("#samad21"),
+            options7
+        );
+        chart2.render();
+        var options6 = {
+            chart: {
+                type: 'bar',
+                height: 350,
+                sparkline: {
+                    enabled: false
+                },
+                toolbar: {
+                    show: false,
+                }
+            },
+            stroke: {
+                curve: 'smooth',
+                width: 2,
+            },
+            fill: {
+                opacity: 1,
+            },
+            series: [{
+                name: 'Vehicles',
+                data: cap_util
+            }],
+            labels: cap_util_label,
+            yaxis: {
+                min: 0
+            },
+
+            colors: ['#8333FF'],
+            tooltip: {
+                x: {
+                    show: true,
+                }
+            }
+        }
+
+        var chart2 = new ApexCharts(
+            document.querySelector("#samad3"),
+            options6
+        );
+        chart2.render();
+
+        var optionssss2 = {
+  chart: {
+    height: 350,
+    type: 'area',
+    toolbar: {
+      show: false,
+    }
+  },
+  
+  plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '55%',
+                    endingShape: 'rounded'
+                },
+            },
+            dataLabels: {
+                enabled: false
+            },
+            legend: {
+                position: 'bottom',
+                horizontalAlign: 'center',
+                fontSize: '14px',
+                markers: {
+                    width: 10,
+                    height: 10,
+                },
+                itemMargin: {
+                    horizontal: 0,
+                    vertical: 8
+                }
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            
+  series: [{
+    name: 'Average Fuel Consumption',
+    type: 'area',
+    data: array1,
+    grid: {
+                row: {
+                    colors: ['#f1f2f3', 'transparent'], // takes an array which will be repeated on columns
+                    opacity: 0.5
+                },
+            },
+  },
+   {
+    name: 'Average Vehicles',
+    type: 'line',
+    data: array1_v
+  }],
+  stroke: {
+    width: [0, 4]
+  },
+  title: {
+    text: 'months'
+  },
+  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  yaxis: [{
+    title: {
+      text: 'Average Fuel Cost',
+    },
+
+  }, {
+    opposite: true,
+    title: {
+      text: 'Average Vehicles'
+    }
+  }]
+
+}
+
+
+
+
+
+        /* var d_1options1 = {
+            chart: {
+                height: 350,
+                type: 'area',
+                toolbar: {
+                    show: false,
+                }
+            },
+            colors: ['#517281', '#f67062'],
+            plotOptions: {
+                bar: {
+                    horizontal: false,
+                    columnWidth: '55%',
+                    endingShape: 'rounded'
+                },
+            },
+            dataLabels: {
+                enabled: false
+            },
+            legend: {
+                position: 'bottom',
+                horizontalAlign: 'center',
+                fontSize: '14px',
+                markers: {
+                    width: 10,
+                    height: 10,
+                },
+                itemMargin: {
+                    horizontal: 0,
+                    vertical: 8
+                }
+            },
+            stroke: {
+                show: true,
+                width: 2,
+                colors: ['transparent']
+            },
+            series: [{
+                name: 'Average Fuel Consumption',
+                data: array1,
+                type:'area'
+            },{
+                name: 'Average Vehicles',
+                data: array1_v,
+                type:'line'
+            }
+        ],
+            xaxis: {
+                categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            },
+            yaxis: {
+                
+    title: {
+      text: 'Average Fuel Consumption',
+    },   
+    opposite: true,
+    title: {
+      text: 'Average Vehicles'
+    }
+  },
+            tooltip: {
+                y: {
+                    formatter: function (val) {
+                        return val
+                    }
+                }
+            }
+        }
+ */
+        var d_1C_3 = new ApexCharts(
+            document.querySelector("#uniqueVisits2"),
+            optionssss2
+        );
+        d_1C_3.render();
+
+    </script>
+
+    <script>
+        var table = $('#example').DataTable(
+
+            {
+                initComplete: function () {
+                    this.api().columns().every(function () {
+                        var column = this;
+                        var select = $('<select  class="form-control"><option value=""></option></select>')
+                            .appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex(
+                                    $(this).val()
+                                );
+
+                                column
+                                    .search(val ? '^' + val + '$' : '', true, false)
+                                    .draw();
+                            });
+
+                        column.data().unique().sort().each(function (d, j) {
+                            select.append('<option value="' + d + '">' + d + '</option>')
+                        });
+                    });
+                },
+                "dom": "<'dt--top-section'<'row'<'col-12 col-sm-6 d-flex justify-content-sm-start justify-content-center'l><'col-12 col-sm-6 d-flex justify-content-sm-end justify-content-center mt-sm-0 mt-3'f>>>" +
+                    "<'table-responsive'tr>" +
+                    "<'dt--bottom-section d-sm-flex justify-content-sm-between text-center'<'dt--pages-count  mb-sm-0 mb-3'i><'dt--pagination'p>>",
+                "oLanguage": {
+                    "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                    "sInfo": "Showing page _PAGE_ of _PAGES_",
+                    "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                    "sSearchPlaceholder": "Search...",
+                    "sLengthMenu": "Results :  _MENU_",
+                },
+                "stripeClasses": [],
+                "lengthMenu": [20, 30, 50],
+                "pageLength": 20
+            },
+
+
+        );
+    </script>
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+
+</body>
+
+<!-- Mirrored from designreset.com/cork/ltr/demo12/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 May 2021 05:25:50 GMT -->
+
+</html>

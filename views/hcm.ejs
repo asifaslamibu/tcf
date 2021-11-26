@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from designreset.com/cork/ltr/demo12/starter_kit_alt_menu.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 May 2021 05:27:13 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>HCM | TCF </title>
+    <link rel="icon" type="image/x-icon" href="/assets/img/favicon.ico"/>
+    <link href="/assets/css/loader.css" rel="stylesheet" type="text/css" />
+    <script src="/assets/js/loader.js"></script>
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="https://fonts.googleapis.com/css?family=Quicksand:400,500,600,700&amp;display=swap" rel="stylesheet">
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/structure.css" rel="stylesheet" type="text/css" class="structure" />
+    
+    
+    <link rel="stylesheet" type="text/css" href="/plugins/select2/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="/plugins/bootstrap-select/bootstrap-select.min.css">
+
+    <link rel="stylesheet" type="text/css" href="/plugins/table/datatable/datatables.css">
+    <link rel="stylesheet" type="text/css" href="/plugins/table/datatable/custom_dt_html5.css">
+    <link rel="stylesheet" type="text/css" href="/plugins/table/datatable/dt-global_style.css">
+
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link href="/assets/css/components/custom-modal.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/animate/animate.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="/assets/css/forms/theme-checkbox-radio.css">
+    <link href="/assets/css/scrollspyNav.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/animate/animate.css" rel="stylesheet" type="text/css" />
+    <script src="/plugins/sweetalerts/promise-polyfill.js"></script>
+    <link href="/plugins/sweetalerts/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+    <link href="/plugins/sweetalerts/sweetalert.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/components/custom-sweetalert.css" rel="stylesheet" type="text/css" />
+   
+
+
+
+    
+    <!-- END GLOBAL MANDATORY STYLES -->
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+
+   
+
+    <!-- END PAGE LEVEL PLUGINS/CUSTOM STYLES -->
+
+</head>
+<style>
+    .my-custom-scrollbar {
+  position: relative;
+  /* width: 800px; */
+  height: 80vh;
+  overflow: auto;
+}
+
+.select3 {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 3em;
+  line-height: 3;
+  background: #f6f7f8;
+  overflow: hidden;
+  border-radius: .25em;
+}
+
+.select3::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #f6f7f8;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+/* Transition */
+.select3:hover::after {
+  color: #f6f7f8;
+}
+
+</style>
+<body class="sidebar-noneoverflow starterkit admin-header alt-menu">
+
+    <!-- BEGIN LOADER -->
+    <div id="load_screen"> <div class="loader"> <div class="loader-content">
+        <div class="spinner-grow align-self-center"></div>
+    </div></div></div>
+    <!--  END LOADER -->
+
+    <!--  BEGIN MAIN CONTAINER  -->
+    <div class="main-container" id="container">
+
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
+
+        <!--  BEGIN SIDEBAR  -->
+        <%- include("sidebar") %>
+        <!--  END SIDEBAR  -->
+        
+        <!--  BEGIN CONTENT AREA  -->
+        <div id="content" class="main-content" >
+            <div class="layout-px-spacing">
+                
+                <div class="content-container">
+
+                    <div class="col-md-12 layout-top-spacing">
+                        <div class="col-left-content">
+
+                            <div class="header-container">
+                                <header class="header navbar navbar-expand-sm">                                    
+                                    <div class="d-flex">
+                                        <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom">
+                                            <div class="bt-menu-trigger">
+                                                <span></span>
+                                            </div>
+                                        </a>
+                                        <div class="page-header">
+                                            <div class="page-title">
+                                                <h3>HCM</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="header-actions">
+                                        <div class="nav-item dropdown language-dropdown more-dropdown">
+                                            <div class="dropdown custom-dropdown-icon">
+                        
+                                                <div class="nav-item dropdown language-dropdown more-dropdown">
+                                                    <%- include("logout") %>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="toggle-notification-bar">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bell"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                                        </div>
+                                    </div>
+                                </header>
+                            </div>
+
+                            <div class="row mt-4">
+                            
+                                <div id="tabsVerticalWithIcon" class="col-lg-12 col-12 layout-spacing">
+                                    <div class="statbox widget box box-shadow">
+                                        
+                                        <div class="widget-content widget-content-area vertical-line-pill my-custom-scrollbar my-custom-scrollbar-primary ">
+                                                
+                            
+                                            <blockquote class="blockquote mb-4" id="myForm">
+                                                
+                                                <div class="container-fluid "  id="rafi">
+                                                        <h4 class="mb-4">Faculty</h4>
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <form  >
+
+                                                                    <!-- <div class="row">
+                                                                        <div class="col-md-6">
+                                                                            <div id="donut-chart" class=""></div>
+                                                                        </div>
+                                                                        <div class="col-md-6">
+                                                                            <div id="donut-chart1" class=""></div>
+
+                                                                        </div>
+                                                                    </div> -->
+
+                                                                    <div class="row">
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group row  mb-4">
+                                                                                <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-center">School : </label>
+                                                                                <div class="col-sm-8">
+                                                                                    <select class="selectpicker"  data-live-search="true" data-width="100%" onchange="changeFunc();" id="selectBox" name="selectBox">
+                                                                                        <option value="0">Select School</option>
+                                                                                        <% for (const i in school) {
+                                                                                            %>
+                                                                                            <option value="<%= school[i].schoolID%>"><%= school[i].Name%></option>
+                                                                                            <%
+                                                                                              }
+                                                                                            %>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group row  mb-4">
+                                                                                <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-center">Vehicles : </label>
+                                                                                <div class="col-sm-8">
+                                                                                    <select class="selectpicker"  data-live-search="true" data-width="100%" id="vahiName" name="vahiName">
+                                                                                        <option value="0">Select Vehicle</option>
+                                                                                        <% for (const i in vahicle) {
+                                                                                            %>
+                                                                                            <option value="<%= vahicle[i].vehicle_id%>"><%= vahicle[i].reg_number%></option>
+                                                                                            <%
+                                                                                              }
+                                                                                            %>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group row  mb-4">
+                                                                                <label for="colFormLabelSm" class="col-sm-4 col-form-label col-form-label-sm text-center">Employe : </label>
+                                                                                <div class="col-sm-8">
+                                                                                    <select class="select3" id="emp_name" name="emp_name"  >
+                                                                                        <option value="0">Select employee</option>
+                                                                                        
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    
+                                                                    <!-- <div class="row">
+                                                                        
+                                                                        <div class="col-md-6">
+                                                                            <div class="card component-card_8">
+                                                                                <div class="card-body">
+                                                            
+                                                                                    <div class="progress-order">
+                                                                                        
+                                                                                        <h6>Faculty</h6>
+                                                                                        <div class="progress-order-body">
+                                                                                            
+                                                                                            <div class="row mt-4">
+                                                                                                
+                                                                                                <div class="col-md-12">
+                                                                                                    
+                                                                                                    <div class="form-group row  mb-4">
+                                                                                                        <div class="col-sm-7">
+                                                                                                            
+                
+                
+                                                                                                        </div>
+                                                                                                    </div>
+                    
+                                                                                                
+                                                                                                </div>
+                                                                                            <div class="col-md-12">
+                                                                                                    
+                                                                                                <div class="form-group row  mb-4">
+                                                                                                    <div class="col-sm-7">
+                                                                                                        
+            
+            
+                                                                                                    </div>
+                                                                                                </div>
+                
+                                                                                            
+                                                                                            </div>
+                                                                                            
+                                                                                            
+                                                                                                
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                            
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                        <div class="col-md-6">
+                                                                            <div class="card component-card_8">
+                                                                                <div class="card-body">
+                                                            
+                                                                                    <div class="progress-order">
+                                                                                        
+                                                            
+                                                                                        <h6>Vehicle Users</h6>
+                                                                                        <div class="progress-order-body">
+                                                                                            
+                                                                                            <div class="row mt-4">
+                                                                                                
+                                                                                                <div class="col-md-12">
+                                                                                                    <div class='parent ex-5'>
+                                                                                                        <div class='row'>
+                                                                                    
+                                                                                                            <div class="col-md-12">
+                                                                                                                <div id='left-lovehandles' class='dragula'>
+                                                                                    
+                                                                                                                    <div class="media  d-block d-xl-flex">
+                                                                                                                       
+                                                                                                                        <div class="media-body">
+                                                                                                                            <div class="d-sm-flex d-block justify-content-between text-sm-left text-center">
+                                                                                                                                <div class="">
+                                                                                                                                    <h5 class="">Engineering & Security</h5>
+                                                                                                                                </div>
+                                                                                                                                
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                    
+                                                                                                                    <div class="media d-block d-xl-flex">
+                                                                                                                        
+                                                                                                                        <div class="media-body">
+                                                                                                                            <div class="d-sm-flex d-block justify-content-between text-sm-left text-center">
+                                                                                                                                <div class="">
+                                                                                                                                    <h5 class="">Front Office</h5>
+                                                                                                                                </div>
+                                                                                                                               
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                    
+                                                                                                                    <div class="media d-block d-xl-flex">
+                                                                                                                       
+                                                                                                                        <div class="media-body">
+                                                                                                                            <div class="d-sm-flex d-block justify-content-between text-sm-left text-center">
+                                                                                                                                <div class="">
+                                                                                                                                    <h5 class="">Logistics</h5>
+                                                                                                                                </div>
+                                                                                                                               
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
+                                                                                    
+                                                                                                                </div>
+                                                                                                            </div>
+                                                                                    
+                                                                                                            
+                                                                                                        </div>
+                                                                                                    </div>
+                    
+                                                                                                
+                                                                                                </div>
+                                                                                            
+                                                                                            
+                                                                                            
+                                                                                                
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                            
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                        
+
+                                                                    </div> -->
+
+                                                                    <div class="container">
+                                                                        <div class="row">
+                                                                            <div class="col-md-12">
+                                                                                
+                                                                                    <button type="button" class="btn btn-primary message" style="float: right;" onclick="
+                                                                                    var el = document.getElementById('emp_name');
+                                                                                    getSelectValues(el);">Assign</button>
+                                                                    
+                                                                    
+                                                                            </div>
+                                                                        </div>
+                                                                        <script>
+                                                                            function getSelectValues(select) {
+                                                                                var result = [];
+                                                                                var options = select && select.options;
+                                                                                var opt;
+                                                                                var schoolName = document.getElementById('selectBox').value;
+                                                                                var vehicleName = document.getElementById('vahiName').value;
+                                                                                    
+                                                                                var time = new Date();
+                                                                                // var formatTime = time.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+                                                                                console.log("12 time "+ time)
+                                                                                
+                                                                                console.log("selected schoolName "+ schoolName + "vehicleName " + vehicleName );
+                                                                                var arrs = [];
+                                                                                for (var i = 0, iLen = options.length; i < iLen; i++) {
+                                                                                    opt = options[i];
+                                                                                    opt.value
+                                                                                    if (opt.selected) {
+                                                                                        result.push(opt.value || opt.text);
+                                                                                        console.log('opt value' + opt.value);
+                                                                                        $.get('facultyUpdate?school=' + schoolName +'&vehicle=' + vehicleName +'&create=' + time  + '&empt='+opt.value+'', function (data) {
+                                                                                           
+                                                                                            
+                                                                                        });
+                                                                                        
+                                                                                    }
+                                                                                }
+
+                                                                                // $('.widget-content .message').on('click', function () {
+                                                                                //         swal({
+                                                                                //             title: 'Saved succesfully',
+                                                                                //             padding: '2em'
+                                                                                //         })
+                                                                                // })
+                                                                                // document.getElementById("myForm").reset();
+                                                                                $("#html5-extension").load(" #html5-extension");
+
+
+                                                                                
+                                                                                return result;
+                                                                            }
+
+                                                                        </script>
+                                                                </form>
+                                                                
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="admin-data-content layout-top-spacing">
+                                                                    
+                                                                    <div class="row layout-top-spacing" id="cancel-row">
+                                                                        
+                                                                        <div class="col-xl-12 col-lg-12 col-sm-12  layout-spacing">
+                                                                            <h4 class="mb-4">History</h4>
+                                                                            <div class="widget-content widget-content-area br-6">
+                                                                                <table id="html5-extension" class="table table-hover non-hover" style="width:100%">
+                                                                                    <thead>
+                                                                                        <tr>
+                                                                                            <th>S.No</th>
+                                                                                            <th>Created By</th>
+                                                                                            <th>School Name</th>
+                                                                                            <th>Vehicle No</th>
+                                                                                            <th>Employe Name</th>
+                                                                                            
+                                                                                            
+                                                                                        </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                        
+                                                                                        <% if(hcm_table.length!=0){ var i=1; var j=1;
+                                                                                            hcm_table.forEach(function(data) { %>
+                                                                                            <tr>
+                                                                                                <td>
+                                                                                                    <%= i %>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <%= data.username %>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <%= data.Name %>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <%= data.reg_number %>
+                                                                                                </td>
+                                                                                                <td>
+                                                                                                    <%= data.emp_name %>
+                                                                                                </td>
+                                                                                                
+                                                                                            </tr>
+                        
+                                                                                            <% i++}) %>
+                                                                                                <% } %>
+                                                                                        
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </div>
+                                                                        </div>
+                                                                    
+                                                                    </div>
+                                                                    
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </blockquote>
+                            
+                                        </div>
+                                    </div>
+                                </div>
+                            
+                            
+                            </div>
+                           
+                        </div>
+                    </div>
+                   
+
+                </div>
+            </div>
+            
+        </div>
+        <!--  END CONTENT AREA  -->
+    </div>
+    <!-- END MAIN CONTAINER -->
+
+    <!-- BEGIN GLOBAL MANDATORY SCRIPTS -->
+    <script src="/assets/js/libs/jquery-3.1.1.min.js"></script>
+    <script src="/bootstrap/js/popper.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/plugins/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="/assets/js/app.js"></script>
+    <script>
+        $(document).ready(function() {
+            App.init();
+        });
+    </script>
+    
+
+
+    <!-- END GLOBAL MANDATORY SCRIPTS -->
+    
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+    <script src="/assets/js/custom.js"></script>
+    <script src="/assets/js/scrollspyNav.js"></script>
+
+    <script src="/plugins/highlight/highlight.pack.js"></script>
+    <script src="/plugins/select2/select2.min.js"></script>
+    <script src="/plugins/select2/custom-select2.js"></script>
+    <script src="/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+
+    <script src="/plugins/table/datatable/datatables.js"></script>
+    <!-- NOTE TO Use Copy CSV Excel PDF Print Options You Must Include These Files  -->
+    <script src="/plugins/table/datatable/button-ext/dataTables.buttons.min.js"></script>
+    <script src="/plugins/table/datatable/button-ext/jszip.min.js"></script>    
+    <script src="/plugins/table/datatable/button-ext/buttons.html5.min.js"></script>
+    <script src="/plugins/table/datatable/button-ext/buttons.print.min.js"></script>
+
+    <script src="/plugins/sweetalerts/sweetalert2.min.js"></script>
+    <script src="/plugins/sweetalerts/custom-sweetalert.js"></script>
+
+    <!-- <script src="assets/js/scrollspyNav.js"></script> -->
+    <script>
+        $('#html5-extension').DataTable( {
+            "dom": "<'dt--top-section'<'row'<'col-sm-12 col-md-6 d-flex justify-content-md-start justify-content-center'B><'col-sm-12 col-md-6 d-flex justify-content-md-end justify-content-center mt-md-0 mt-3'f>>>" +
+        "<'table-responsive'tr>" +
+        "<'dt--bottom-section d-sm-flex justify-content-sm-between text-center'<'dt--pages-count  mb-sm-0 mb-3'i><'dt--pagination'p>>",
+            buttons: {
+                buttons: [
+                    { extend: 'copy', className: 'btn btn-sm' },
+                    { extend: 'csv', className: 'btn btn-sm' },
+                    { extend: 'excel', className: 'btn btn-sm' },
+                    { extend: 'print', className: 'btn btn-sm' }
+                ]
+            },
+            "oLanguage": {
+                "oPaginate": { "sPrevious": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>', "sNext": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-right"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>' },
+                "sInfo": "Showing page _PAGE_ of _PAGES_",
+                "sSearch": '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>',
+                "sSearchPlaceholder": "Search...",
+               "sLengthMenu": "Results :  _MENU_",
+            },
+            "stripeClasses": [],
+            "lengthMenu": [7, 10, 20, 50],
+            "pageLength": 7 
+        } );
+
+        var myCustomScrollbar = document.querySelector('.my-custom-scrollbar');
+        var ps = new PerfectScrollbar(myCustomScrollbar);
+
+        var scrollbarY = myCustomScrollbar.querySelector('.ps__rail-y');
+
+        myCustomScrollbar.onscroll = function () {
+        scrollbarY.style.cssText = `top: ${this.scrollTop}px!important; height: 400px; right: ${-this.scrollLeft}px`;
+        }
+
+        $(".tagging").select2({
+            tags: true
+        });
+        
+    </script>
+
+    <script>
+        function changeFunc() {
+        var selectBox = document.getElementById("selectBox");
+        var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+        console.log("han "+selectedValue);
+    //    $.get('/getUser?id=' + selectedValue );
+       $.ajax({
+        type: 'GET',
+        url: '/getUser?schoolID=' + selectedValue,
+        dataType: 'json',
+        success: function(response){
+
+        var len = response.length;
+
+        $("#emp_name").empty();
+        for( var i = 0; i<len; i++){
+
+            var id = response[i]['emp_ID'];
+            var name = response[i]['emp_name'];
+            console.log(id+" "+name)
+            //$("#area2").append("<option value='"+id+"'>"+name+"</option>");
+            $('#emp_name').append(`<option value="${id}">${name}</option>`);
+
+        }
+      
+},
+  error: function (data) {
+    console.log("Error.", data);
+  }   
+       });
+    }
+    
+    </script>
+
+    
+    
+   
+
+    <!-- BEGIN PAGE LEVEL PLUGINS/CUSTOM SCRIPTS -->
+</body>
+
+
+
+<!-- Mirrored from designreset.com/cork/ltr/demo12/starter_kit_alt_menu.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 03 May 2021 05:27:13 GMT -->
+</html>
